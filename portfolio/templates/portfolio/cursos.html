@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Cursos{% endblock %}
+
+{% block bkg_img %}{% load static %}{% static '/core/img/cursos-bg.jpg' %}{% endblock %}
+
+{% block header %}
+<section class="header1 bkg-wood mbr-parallax-background" id="header1-f" style="padding-top: 8rem; padding-bottom: 8rem;">
+    <div class="mbr-overlay" style="opacity: 0.5; background-color: #65C6D4;"></div>
+    <div class="align-center container">
+        <div class="row justify-content-center mt-4 mt-md-5">
+            <div class="col-12 col-lg-8">
+                <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1"><strong>Cursos</strong></h1>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+ {% for course in courses %}
+
+      <div class="row project mb-5">
+         <div class="col-lg-3 col-md-4 offset-lg-1">
+            <img class="img-fluid" src="{{course.image.url}}" alt="">
+         </div>
+         <div class="col-lg-7 col-md-8">
+            <h2 class="section-heading title">{{course.title}}</h2>
+            <p class="text-muted mb-md"><small><i class="far fa-calendar-alt"></i> {{ course.date|date:"F \d\e Y" }}</small></p>
+            <p>{{course.description|linebreaks}}</p>
+            {% if course.archivo_pdf %}
+                <p><a href="{{ course.archivo_pdf.url }}" target="_blank" class="btn-outline-info btn-md">
+                <i class="far fa-file-pdf"></i> Ver PDF / Certificado
+                </a>
+            </p>
+            {% endif %}
+         </div>
+      </div>
+   {% endfor %}
+{% endblock %}

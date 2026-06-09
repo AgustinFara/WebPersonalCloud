@@ -1,0 +1,106 @@
+
+.bkg-trees {
+  background-image: url("../../../assets/images/trees.jpg");
+}
+.bkg-trees .mbr-section-title {
+  text-align: center;
+  color: #000000;
+}
+.bkg-trees .mbr-text,
+.bkg-trees .mbr-section-btn {
+  color: #232323;
+  text-align: center;
+}
+@media (max-width: 991px) {
+  .bkg-trees .mbr-section-title,
+  .bkg-trees .mbr-section-btn,
+  .bkg-trees .mbr-text {
+    text-align: center;
+  }
+}
+
+.bkg-paint {
+    background-image: url("../../../assets/images/mbr-1920x1281.jpg");
+  }
+  .bkg-paint .mbr-section-title {
+    text-align: center;
+    color: #000000;
+  }
+  .bkg-paint .mbr-text,
+  .bkg-paint .mbr-section-btn {
+    color: #232323;
+    text-align: center;
+  }
+  @media (max-width: 991px) {
+    .bkg-paint .mbr-section-title,
+    .bkg-paint .mbr-section-btn,
+    .bkg-paint .mbr-text {
+      text-align: center;
+    }
+  }
+
+  .bkg-water {
+    background-image: url("../../../assets/images/water.jpg");
+  }
+  .bkg-water .mbr-section-title {
+    text-align: center;
+    color: #000000;
+  }
+  .bkg-water .mbr-text,
+  .bkg-water .mbr-section-btn {
+    color: #232323;
+    text-align: center;
+  }
+  @media (max-width: 991px) {
+    .bkg-water .mbr-section-title,
+    .bkg-water .mbr-section-btn,
+    .bkg-water .mbr-text {
+      text-align: center;
+    }
+  }
+
+.bkg-wood {
+    background-image: url("../../../assets/images/wood.jpg");
+}
+
+.bkg-wood .mbr-section-title {
+    text-align: center;
+    color: #000000;
+}
+
+.bkg-wood .mbr-text,
+.bkg-wood .mbr-section-btn {
+    color: #232323;
+    text-align: center;
+}
+
+@media (max-width: 991px) {
+    .bkg-wood .mbr-section-title,
+    .bkg-wood .mbr-section-btn,
+    .bkg-wood .mbr-text {
+        text-align: center;
+    }s
+}
+
+.bkg-snow {
+  background-image: url("../../../assets/images/snow.jpg");
+}
+
+.bkg-snow .mbr-section-title {
+  text-align: center;
+  color: #000000;
+}
+
+.bkg-snow .mbr-text,
+.bkg-snow .mbr-section-btn {
+  color: #232323;
+  text-align: center;
+}
+
+@media (max-width: 991px) {
+  .bkg-snow .mbr-section-title,
+  .bkg-snow .mbr-section-btn,
+  .bkg-snow .mbr-text {
+      text-align: center;
+  }
+}

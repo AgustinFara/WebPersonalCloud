@@ -1,0 +1,74 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Experiencia Laboral{% endblock %}
+
+{% block bkg_img %}{% load static %}{% static '/core/img/about-bg.jpg' %}{% endblock %}
+
+
+{% block header %}
+<section class="header1 bkg-wood mbr-parallax-background" id="header1-f" style="padding-top: 8rem; padding-bottom: 8rem;">
+    <div class="mbr-overlay" style="opacity: 0.5; background-color: #65C6D4;"></div>
+    <div class="align-center container">
+        <div class="row justify-content-center mt-4 mt-md-5">
+            <div class="col-12 col-lg-8">
+                <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1"><strong>Experiencia Laboral</strong></h1>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<!-- timeline -->
+<section class="timeline1 timeline" id="timeline1-s">
+
+   {% for work in works %}
+
+      <div class="row timeline-element mb-2">
+         <div class="col-12 align-left">
+            <div class="timeline-text-wrapper">
+               <p class="mbr-timeline-title mbr-fonts-style display-5">
+                  <strong>{{work.title}} en {{work.company}}</strong>
+               </p>
+               <p class="mbr-timeline-title mbr-fonts-style display-5">
+                  <i >{{work.date_started}} - {{work.date_finished}} &nbsp; ( {{work.time_worked}} )</i>
+               </p>
+            </div>
+         </div>
+         <img class="iconBackground" src={{work.image.url}} alt={{work.company}}>
+      {% for client in work.client_set.all %}
+      </div>
+      <div class="row timeline-element mb-2">
+         <div class="col-12">
+            <div class="timeline-subtext-wrapper">
+               <h4 class="mbr-timeline-title mbr-fonts-style display-7 align-left">
+                  <strong >Cliente: {{client.company}}</strong>
+                  <p><i>{{client.date_started}} - {{client.date_finished}} &nbsp; ( {{work.time_worked}} )</i></p>
+                  <p>{{client.description|linebreaks}}</p>
+               </h4>
+            </div>
+         </div>
+         <img class="subIconBackground" src={{client.image.url}} alt={{client.company}}>
+      {% if client ==  work.client_set.last %}
+      </div>
+      {% endif %}
+      {% empty %}
+         <div class="col-12  align-left">
+            <div class="timeline-text-wrapper display-7">
+                  {{work.description|linebreaks}}
+            </div>
+         </div>
+      </div>
+      {% endfor %}
+
+      {% if work ==  works.last %}
+      <div class="row timeline-element mb-2">
+         <span class="iconBackgroundEnd"></span>
+      </div>
+      {% endif %}
+   {% endfor %}
+   </div>
+</section>
+{% endblock %}
+
+

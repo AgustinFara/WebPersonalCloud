@@ -1,0 +1,53 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Contacto{% endblock %}
+
+{% block bkg_img %}{% load static %}{% static '/core/img/contact-bg.jpg' %}{% endblock %}
+
+{% block header %}
+  <section class="header1 bkg-trees mbr-fullscreen mbr-parallax-background" id="header1-f">
+    <div class="mbr-overlay" style="opacity: 0.7; background-color: #FFFFFF;">
+    </div>
+    <div class="container">
+        <div class="mbr-section-head">
+            <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+            </h3>
+            <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1"><strong>Contacto</strong></h1>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="card col-12 col-lg-6">
+                <div class="card-wrapper">
+                    <div class="card-box align-center">
+                        <div class="image-wrapper">
+                            <a href="mailto:agustinfara@gmail.com" target="_blank">
+                            <span class="mbr-iconfont mobi-mbri-letter mobi-mbri" style="font-size:75px;color: rgb(0, 0, 0,0.7);"></span>
+                            </a>
+                        </div>
+                        <h5 class="link mbr-fonts-style display-7">
+                        <p>Enviame un correo</p>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card col-12 col-lg-6">
+                <div class="card-wrapper">
+                    <div class="card-box align-center">
+                        <div class="image-wrapper">
+                        <a href="https://www.linkedin.com/in/agustinjosefara/" target="_blank">
+                            <span class="mbr-iconfont mbr-iconfont-social socicon-linkedin socicon" style="font-size:75px;color: rgb(0, 0, 0, 0.7);"></span>
+                        </a>
+                        </div>
+                        <h5 class="link mbr-black mbr-fonts-style display-7">
+                            <p>Contactame por Linkedin</p>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
