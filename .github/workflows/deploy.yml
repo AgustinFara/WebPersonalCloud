@@ -1,0 +1,30 @@
+name: Deploy to Google Cloud Run
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Autenticar en Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Configurar SDK
+        uses: google-github-actions/setup-gcloud@v1
+
+      - name: Construir y Desplegar
+        run: |
+          gcloud builds submit --tag gcr.io/${{ secrets.GCP_PROJECT_ID }}/web-personal
+          gcloud run deploy web-personal \
+            --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/web-personal \
+            --platform managed \
+            --region us-central1 \
+            --allow-unauthenticated \
+            --set-env-vars DB_URL=${{ secrets.DB_URL }},SECRET_KEY=${{ secrets.SECRET_KEY }},DEBUG=${{ secrets.DEBUG }},SUPABASE_ACCESS_KEY=${{ secrets.SUPABASE_ACCESS_KEY }},SUPABASE_SECRET=${{ secrets.SUPABASE_SECRET }},SUPABASE_PROJECT_ID=${{ secrets.SUPABASE_PROJECT_ID }}
