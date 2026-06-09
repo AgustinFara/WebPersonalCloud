@@ -19,24 +19,40 @@
 
 {% block content %}
 <section class="clients2 cid-sjsHGKf7dW" id="clients2-r">
-
     <div class="container-fluid">
-         <div class="row justify-content-center">
-            {% for tech in techs %}
-            <div class="card col-12 col-md-6 col-lg-4">
-                <div class="card-wrapper">
-                    <div class="img-wrapper">
-                        {{ tech.icon_svg|safe }}
-                    </div>
-                    <div class="card-box align-center">
-                        <h5 class="card-title mbr-fonts-style mb-3 display-5"><strong>{{ tech.name }}</strong></h5>
-                    </div>
+        {% for category in categories %}
+            
+            <div class="row justify-content-center">
+                <div class="mbr-section-title mbr-fonts-style display-7">
+                    <h3 class="mt-5">{{ category.name }}</h3>
                 </div>
             </div>
-            {% endfor %}
-        </div>
+            <div class="row">
+                <div class="col-12 my-md-3 my-md-3"></div>
+            </div>
+
+            <div class="row justify-content-center">
+                {% for tech in category.technologies.all %}
+                <div class="card col-12 col-md-6 col-lg-4">
+                    <div class="card-wrapper">
+                        <div class="img-wrapper">
+                            {{ tech.icon_svg|safe }}
+                        </div>
+                        <div class="card-box align-center">
+                            <h5 class="card-title mbr-fonts-style mb-3 display-5">
+                                <strong>{{ tech.name }}</strong>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="row">
+                <div class="col-12 my-4 my-md-5"></div>
+            </div>
+
+        {% endfor %}
     </div>
-
 </section>
-
 {% endblock %}

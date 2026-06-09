@@ -2,11 +2,18 @@ from django.shortcuts import render
 from django.db.models import Min, Max
 from django.db.models.functions import Lower
 import datetime
-from .models import Work, Technology
+from .models import Work, Technology, Category
 
+
+def tech(request):
+    categories = Category.objects.all().prefetch_related('technologies')
+    return render(request, 'cv/tech.html', {'categories': categories})
+
+""""
 def tech(request):
     techs = Technology.objects.all()
     return render(request, 'cv/tech.html', {'techs': techs})
+"""
 
 
 def about(request):

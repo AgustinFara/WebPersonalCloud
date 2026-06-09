@@ -3,8 +3,24 @@ from babel import Locale
 from django.conf import settings
 from django.core.exceptions import ValidationError
 
+class Category(models.Model):
+    name = models.CharField(max_length=50, verbose_name="Nombre de categoría")
+    order = models.IntegerField(default=0, verbose_name="Orden de visualización")
+    created = models.DateTimeField(auto_now_add=True, verbose_name = "Cronomarcador de creación")
+    updated = models.DateTimeField(auto_now =True, verbose_name = "Cronomarcador de modificación")
+
+    class Meta:
+        verbose_name = 'Categoría'
+        verbose_name_plural = 'Categorías'
+        ordering = ['order'] # Esto permite que siempre se listen ordenadas
+
+    def __str__(self):
+        return self.name
+
 class Technology(models.Model):
     name = models.CharField(max_length=50)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="Categoría", related_name="technologies", null=True, blank=True)    
+    order = models.IntegerField(default=0, verbose_name="Orden de visualización")
     icon_svg = models.TextField(help_text="Pega aquí el código SVG")
     created = models.DateTimeField(auto_now_add=True, verbose_name = "Cronomarcador de creación")
     updated = models.DateTimeField(auto_now =True, verbose_name = "Cronomarcador de modificación")
@@ -12,6 +28,7 @@ class Technology(models.Model):
     class Meta:
         verbose_name = 'Tecnología'
         verbose_name_plural = 'Tecnologías'
+        ordering = ['order']
 
 
 
