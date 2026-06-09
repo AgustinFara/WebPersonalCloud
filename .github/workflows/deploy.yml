@@ -21,9 +21,9 @@ jobs:
 
       - name: Construir y Desplegar
         run: |
-          gcloud builds submit --tag gcr.io/${{ secrets.GCP_PROJECT_ID }}/web-personal
+          gcloud builds submit --tag gcr.io/${{ secrets.GCP_PROJECT_ID }}/mi-repo-web/mi-web-app:v3
           gcloud run deploy web-personal \
-            --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/web-personal \
+            --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/mi-repo-web/mi-web-app:v3 \
             --platform managed \
             --region us-central1 \
             --allow-unauthenticated \
