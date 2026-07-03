@@ -1,0 +1,59 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block bkg_img %}{% load static %}{% static '/core/img/home-bg.jpg' %}{% endblock %}
+
+{% block header %}
+<section class="header1 bkg-wood mbr-parallax-background" id="header1-f" style="padding-top: 5rem; padding-bottom: 2rem;">
+    <div class="mbr-overlay" style="opacity: 0.5; background-color: #65C6D4;"></div>
+    <div class="row align-items-center justify-content-center">
+                
+        <div class="col-auto">
+            <a href="{% url 'core:chart_con_fecha' fecha_ant %}" class="mbr-section-title mbr-fonts-style mb-3 display-1"><strong>&lt;</strong></a>
+        </div>
+                
+        <div class="col-auto">
+            <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1"><strong>   Protagonistas {{ fecha }}   </strong></h1>
+        </div>
+
+        {% if fecha < hoy %}
+        
+        <div class="col-auto">
+            <a href="{% url 'core:chart_con_fecha' fecha_sig %}" class="mbr-section-title mbr-fonts-style mb-3 display-1"><strong>&gt;</strong></a>
+        </div>
+        {% else %}
+        <div class="col-auto">
+            <P class="mbr-section-title mbr-fonts-style mb-3 display-1" style="color: gray;opacity: 0.40"><strong>&gt;</strong></P>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+
+
+{% block content %} 
+{% if mostrar_chart %}
+<div id="bubble-container" style="width: 70vw; height: 70vh; display:flex; justify-content:center;"></div>   
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="{% static '/core/js/bubble_chart.js' %}"></script>   
+<script>
+    // Defino los datos en js para pasarlo a la función
+    const data = {{ data_jerarquica|safe }};
+    const fecha = "{{ fecha }}";    
+    // Llamo a la función D3.js
+    initBubbleChart(data, fecha);
+</script>
+
+{% else %}
+<div>
+    <p>
+        Aún no se procesaron los datos del día.
+    </p>
+</div>
+{% endif %}
+</div>
+
+{% endblock %} 

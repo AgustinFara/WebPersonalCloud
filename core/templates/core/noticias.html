@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    core:Home
+{% endblock %}
+
+{% block bkg_img %}{% load static %}{% static '/core/img/home-bg.jpg' %}{% endblock %}
+
+{% block header %}
+<section class="header1 bkg-wood mbr-parallax-background" id="header1-f" style="padding-top: 5rem; padding-bottom: 2rem;">
+    <div class="mbr-overlay" style="opacity: 0.5; background-color: #65C6D4;"></div>
+    <div class="align-center container">
+        <div class="row justify-content-center mt-4 mt-md-5">
+            <div class="col-12 col-lg-8">
+                <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1"><strong>Noticias sobre: {{ protagonista }}</strong></h1>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<div class="news-list">
+    {% for n in noticias %}
+    <div class="news-item">
+        <div class="content">
+            <span class="portal">{{ n.portal }}</span> | 
+            <span class="title">{{ n.titulo }}</span> 
+            <span class="freq">({{ n.frecuencia }} {% if n.frecuencia == 1 %}muestra{% else %}muestras{% endif %})</span>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<style>
+    .news-list { padding: 20px; min-height: 50vh; }
+    .news-item { display: flex; align-items: center; margin-bottom: 15px; }
+    .dot { 
+        width: 15px; height: 15px; 
+        background: #65C6D4; border-radius: 50%; 
+        margin-right: 15px; 
+    }
+    .content { font-family: sans-serif; }
+</style>
+{% endblock %}

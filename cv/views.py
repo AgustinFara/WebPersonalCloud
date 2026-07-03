@@ -3,6 +3,7 @@ from django.db.models import Min, Max
 from django.db.models.functions import Lower
 import datetime
 from .models import Work, Technology, Category
+from django.utils import timezone
 
 
 def tech(request):
@@ -21,7 +22,7 @@ def about(request):
 
     # --- Agrego script para la edad ---
     fecha_nacimiento = datetime.date(1984, 3, 4)
-    hoy = datetime.date.today()
+    hoy = timezone.localdate()
     edad = hoy.year - fecha_nacimiento.year - ((hoy.month, hoy.day) < (fecha_nacimiento.month, fecha_nacimiento.day))
     # ------------------------------
 

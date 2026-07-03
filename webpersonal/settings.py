@@ -23,6 +23,14 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+json_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+
+
+if json_path and os.path.exists(json_path):
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = json_path
+else:
+    pass
+
 
 # Buscamos una variable llamada IS_DOCKER que definiremos en el Dockerfile
 IS_DOCKER = os.environ.get('IS_DOCKER', 'False') == 'True'
@@ -171,13 +179,15 @@ LANGUAGES = (
 
 LANGUAGE_CODE = 'es-AR'
 
-TIME_ZONE = 'UTC'
+
+TIME_ZONE = 'America/Argentina/Buenos_Aires' 
+
+USE_TZ = True
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
