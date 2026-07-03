@@ -130,3 +130,6 @@ dmypy.json
 
 # Static files
 staticfiles/
+
+#credenciales
+CredencialesBigQuery.json
