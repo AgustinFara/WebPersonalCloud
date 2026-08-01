@@ -9,22 +9,28 @@ from google.auth.exceptions import DefaultCredentialsError
 # ==============================================================================
 # Funcion que valida Google Application Credentials y la devuelve en settings.py
 # ==============================================================================
-
 def validar_google_aplication_credentials():
-    if 'test' in sys.argv:
-        print("🧪 Modo Test detectado: Omitiendo validación estricta de Google Auth.")
-        return None
-
-    try:
-        # Intenta obtener las credenciales automáticas (vía JSON o vía entorno de GCP)
-        credentials, project = google.auth.default()
-        print(f"✅ Google Auth verificado para el proyecto: {project}")
+    # 1. Si existe la variable con la ruta al archivo JSON
+    json_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+    if json_path and os.path.exists(json_path):
+        print("✅ GCP Config: Se encontró archivo JSON de credenciales.")
         return True
-    except DefaultCredentialsError:
-        raise ValueError(
-            "⛔ CRÍTICO: No se encontraron credenciales válidas de Google "
-            "(ni por archivo JSON ni por entorno de GCP)."
-        )
+
+    # 2. O si tienes el contenido del JSON en una variable de entorno
+    if os.getenv('GCP_SA_KEY') or os.getenv('GOOGLE_APPLICATION_CREDENTIALS_JSON'):
+        print("✅ GCP Config: Se encontró contenido de credenciales en variable de entorno.")
+        return True
+
+    # 3. O si estamos en Cloud Run (Google define la variable K_SERVICE en Cloud Run)
+    if os.getenv('K_SERVICE'):
+        print("✅ GCP Config: Ejecutando en Cloud Run (Autenticación nativa habilitada).")
+        return True
+
+    # Si no cumple ninguna de las anteriores, falta la configuración
+    raise ValueError(
+        "⛔ CRÍTICO: Falta la configuración de credenciales de Google "
+        "(No hay JSON, no hay GCP_SA_KEY ni se detectó entorno Cloud Run)."
+    )
 
 
 
