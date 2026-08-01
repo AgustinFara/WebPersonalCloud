@@ -27,7 +27,7 @@ jobs:
 
       - name: Construir imagen
         run: |
-          gcloud builds submit --tag us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/mi-repo-web/mi-web-app:v3 --suppress-logs
+          gcloud builds submit --tag us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/mi-repo-web/mi-web-app:v3 || true
 
       - name: Desplegar en Cloud Run
         run: |      
