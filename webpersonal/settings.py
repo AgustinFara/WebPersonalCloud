@@ -185,7 +185,7 @@ TIME_ZONE = 'America/Argentina/Buenos_Aires'    # Zona horaria por defecto para 
 # Archivos estáticos
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Le digo a Django que use el backend de S3 de AWS, que es compatible con Supabase Storage, para almacenar archivos multimedia.
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
