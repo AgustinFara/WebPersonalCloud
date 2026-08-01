@@ -1,11 +1,16 @@
 name: Deploy to Google Cloud Run
 
 on:
-  push:
-    branches: [ "main" ]
+  workflow_run:
+    workflows: ["Lint and Test"] 
+    types:
+      - completed
+    branches:
+      - main
 
 jobs:
   deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -22,7 +27,7 @@ jobs:
 
       - name: Construir imagen
         run: |
-          gcloud builds submit --tag us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/mi-repo-web/mi-web-app:v3 || true
+          gcloud builds submit --tag us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/mi-repo-web/mi-web-app:v3
 
       - name: Desplegar en Cloud Run
         run: |      
