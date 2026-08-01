@@ -2,7 +2,7 @@
 
 {% block title %}Proyectos{% endblock %}
 
-{% block bkg_img %}{% load static %}{% static '/core/img/portfolio-bg.jpg' %}{% endblock %}
+{% block bkg_img %}{% load static %}{% static '/core/img/proyecto-rocas.jpg' %}{% endblock %}
 
 {% block header %}
 <section class="header1 bkg-wood mbr-parallax-background" id="header1-f" style="padding-top: 8rem; padding-bottom: 8rem;">
@@ -30,6 +30,15 @@
             {% if project.link %}
             <p><a href="{{project.link}}">Más información</a></p>
             {% endif %}
+         </div>
+      </div>
+    {% empty %}
+<!-- Este bloque se renderiza SOLO si la lista 'projects' está vacía -->
+      <div class="row justify-content-center text-center my-5 py-4">
+         <div class="col-lg-8">
+            <div class="alert alert-info shadow-sm p-4" role="alert" style="border-radius: 10px;">
+               <h4 class="alert-heading mb-2">📁 No hay proyectos para mostrar</h4>
+            </div>
          </div>
       </div>
    {% endfor %}

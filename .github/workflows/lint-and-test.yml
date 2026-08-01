@@ -1,0 +1,59 @@
+name: Lint and Test
+
+on: [push] # Se ejecuta automáticamente en cada push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    # 1. Levantamos un contenedor de PostgreSQL real en GitHub Actions
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: test_db
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgrespassword
+        ports:
+          - 5432:5432
+        # Esperamos a que Postgres esté completamente listo antes de iniciar los pasos
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt flake8
+
+      - name: Ejecutar Linter (Flake8)
+        run: flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+
+      - name: Crear archivo de credenciales de prueba de Google
+        run: |
+          echo '{"type": "service_account", "project_id": "fake-project"}' > fake_credentials.json
+
+      - name: Ejecutar Tests de Django
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: 'fake_credentials.json'
+          DEBUG: 'True'
+          ALLOWED_HOSTS: 'localhost,127.0.0.1'
+          SECRET_KEY: 'clave-de-prueba-super-secreta'
+          DB_SCHEMA: 'test'
+          # Apuntamos al Postgres que se levantó en el bloque 'services'
+          DB_URL: 'postgres://postgres:postgrespassword@localhost:5432/test_db'
+          SUPABASE_ACCESS_KEY: 'fake_access_key'
+          SUPABASE_SECRET: 'fake_secret'
+          SUPABASE_PROJECT_ID: 'fake_project_id'
+        run: python manage.py test

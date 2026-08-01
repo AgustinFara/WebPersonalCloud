@@ -1,12 +1,13 @@
-from django.test import TestCase, Client
+from django.test import TestCase,override_settings, Client 
 from django.conf import settings
 from django.urls import reverse
 from .models import Work
 import datetime
 from unittest.mock import patch
 
-# Create your tests here.
 
+
+@override_settings(STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage') 
 class WorkModelTests(TestCase):
     def test_date_started_english(self):
         settings.LANGUAGE_CODE = 'en-US'
@@ -75,31 +76,34 @@ class WorkModelTests(TestCase):
         self.assertEqual(work_diff.time_worked(), '1 año y 1 mes')
 
 
+@override_settings(STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage') 
 class TestEdadAbout(TestCase):
 
     def setUp(self):
         self.client = Client()
         self.url = reverse('cv:about')
 
-    @patch('cv.views.datetime')
-    def test_edad_calculada_correctamente_en_cumpleaños(self, mock_datetime):
-        """Prueba que si hoy esel cumpleaños de 2024, la edad sea exactamente 40"""
-        mock_datetime.date.today.return_value = datetime.date(2024, 3, 4)
-        mock_datetime.date.side_effect = datetime.date
+    @patch('cv.views.timezone.localdate')
+    def test_edad_calculada_correctamente_en_cumpleaños(self, mock_localdate):
+        """Prueba que si hoy es el cumpleaños de 2024, la edad sea exactamente 40"""
+        # Le decimos a localdate() que devuelva DIRECTAMENTE el objeto fecha
+        mock_localdate.return_value = datetime.date(2024, 3, 4)
+
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['edad'], 40)
 
-    @patch('cv.views.datetime')
-    def test_edad_un_dia_antes_del_cumpleaños(self, mock_datetime):
+    @patch('cv.views.timezone.localdate')
+    def test_edad_un_dia_antes_del_cumpleaños(self, mock_localdate):
         """Prueba que si hoy es un día antes de tu cumple en 2024, todavía devuelva 39"""
-        mock_datetime.date.today.return_value = datetime.date(2024, 3, 3)
-        mock_datetime.date.side_effect = datetime.date
+        # Le decimos a localdate() que devuelva DIRECTAMENTE el objeto fecha
+        mock_localdate.return_value = datetime.date(2024, 3, 3)
+
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['edad'], 39)
 
-
+@override_settings(STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage') 
 class TestExpAbout(TestCase):
 
     def setUp(self):
