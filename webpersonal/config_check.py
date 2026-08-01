@@ -2,6 +2,7 @@
 # IMPORTS
 # ==============================================================================
 import os
+import sys
 import google.auth
 from google.auth.exceptions import DefaultCredentialsError
 
@@ -10,6 +11,10 @@ from google.auth.exceptions import DefaultCredentialsError
 # ==============================================================================
 
 def validar_google_aplication_credentials():
+    if 'test' in sys.argv:
+        print("🧪 Modo Test detectado: Omitiendo validación estricta de Google Auth.")
+        return None
+
     try:
         # Intenta obtener las credenciales automáticas (vía JSON o vía entorno de GCP)
         credentials, project = google.auth.default()
@@ -20,6 +25,7 @@ def validar_google_aplication_credentials():
             "⛔ CRÍTICO: No se encontraron credenciales válidas de Google "
             "(ni por archivo JSON ni por entorno de GCP)."
         )
+
 
 
 # ==============================================================================
