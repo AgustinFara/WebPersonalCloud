@@ -2,25 +2,24 @@
 # IMPORTS
 # ==============================================================================
 import os
-
+import google.auth
+from google.auth.exceptions import DefaultCredentialsError
 
 # ==============================================================================
 # Funcion que valida Google Application Credentials y la devuelve en settings.py
 # ==============================================================================
 
 def validar_google_aplication_credentials():
-#Cargo el nombre del archivo json con las credenciales de BigQuery en json_path
-    JSON_PATH = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
-
-    # Si el archivo existe, lo asigno a la variable de entorno GOOGLE_APPLICATION_CREDENTIALS
-    # Esto es necesario para que la librería de Google Cloud pueda autenticar las solicitudes a BigQuery
-    if JSON_PATH and os.path.exists(JSON_PATH):
-        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = JSON_PATH
-        print(f"✅ Credenciales de Google cargadas desde: {JSON_PATH}")
-        return JSON_PATH
-    else:
-        raise ValueError("⛔ CRÍTICO: No se puede iniciar la aplicación sin el Json GOOGLE_APPLICATION_CREDENTIALS. configurado.")
-
+    try:
+        # Intenta obtener las credenciales automáticas (vía JSON o vía entorno de GCP)
+        credentials, project = google.auth.default()
+        print(f"✅ Google Auth verificado para el proyecto: {project}")
+        return True
+    except DefaultCredentialsError:
+        raise ValueError(
+            "⛔ CRÍTICO: No se encontraron credenciales válidas de Google "
+            "(ni por archivo JSON ni por entorno de GCP)."
+        )
 
 
 # ==============================================================================
