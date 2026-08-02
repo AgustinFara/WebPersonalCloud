@@ -21,14 +21,15 @@
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/png" href="{% static 'core/img/AJF_ico.png' %}">
 
-  <!--Icons CSS -->
-  <link rel="stylesheet" href="{% static 'core/assets/socicon/css/styles.css' %}">
+  <!-- Socicon CSS por CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/socicon/1.2.0/css/socicon.min.css">
 
   <!-- Estilos CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   
   <!-- CSS custom para la web -->
   <link href="{% static 'core/css/webpersonal.css' %}" rel="stylesheet">
+  
   <!-- Añado un extra CSS, para paginas que requierar un css adicional -->
   {% block extra_css %}{% endblock %}
 </head>

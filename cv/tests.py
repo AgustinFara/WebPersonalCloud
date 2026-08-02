@@ -4,6 +4,7 @@ from unittest.mock import patch
 from django.conf import settings
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
+from django.utils import translation
 
 from .models import Work
 
@@ -93,7 +94,9 @@ class TestEdadAbout(TestCase):
 
     def setUp(self):
         self.client = Client()
+        translation.activate('es')
         self.url = reverse('cv:about')
+        
 
     @patch('cv.views.timezone.localdate')
     def test_edad_calculada_correctamente_en_cumpleaños(self, mock_localdate):
@@ -114,6 +117,9 @@ class TestEdadAbout(TestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['edad'], 39)
+
+    def tearDown(self):
+        translation.deactivate() # Buena práctica: desactivar al terminar el test
 
 
 @override_settings(STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage')
