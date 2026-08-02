@@ -1,51 +1,52 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 
-{% block title %}Contacto{% endblock %}
-
-{% block bkg_img %}{% load static %}{% static '/core/img/contact-bg.jpg' %}{% endblock %}
+{% block title %}{% translate "Contacto" %}{% endblock %}
 
 {% block header %}
-  <section class="header1 bkg-trees mbr-fullscreen mbr-parallax-background" id="header1-f">
-    <div class="mbr-overlay" style="opacity: 0.7; background-color: #FFFFFF;">
+<section class="bkg-trees position-relative py-5 flex-grow-1 d-flex align-items-center" id="contacto">
+  
+  <div class="position-absolute w-100 h-100 top-0 start-0 bg-white" style="opacity: 0.7; z-index: 1;"></div>
+
+  <div class="container position-relative text-center py-4" style="z-index: 2;">
+    
+    <!-- Título grande -->
+    <div class="row justify-content-center mb-5">
+      <div class="col-12">
+        <h1 class="contact-title display-2 mb-0" >
+          {% translate "Contacto" %}
+        </h1>
+      </div>
     </div>
-    <div class="container">
-        <div class="mbr-section-head">
-            <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
-            </h3>
-            <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1"><strong>Contacto</strong></h1>
-        </div>
-        <div class="row justify-content-center mt-4">
-            <div class="card col-12 col-lg-6">
-                <div class="card-wrapper">
-                    <div class="card-box align-center">
-                        <div class="image-wrapper">
-                            <a href="mailto:agustinfara@gmail.com" target="_blank">
-                            <span class="mbr-iconfont mobi-mbri-letter mobi-mbri" style="font-size:75px;color: rgb(0, 0, 0,0.7);"></span>
-                            </a>
-                        </div>
-                        <h5 class="link mbr-fonts-style display-7">
-                        <p>Enviame un correo</p>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-            <div class="card col-12 col-lg-6">
-                <div class="card-wrapper">
-                    <div class="card-box align-center">
-                        <div class="image-wrapper">
-                        <a href="https://www.linkedin.com/in/agustinjosefara/" target="_blank">
-                            <span class="mbr-iconfont mbr-iconfont-social socicon-linkedin socicon" style="font-size:75px;color: rgb(0, 0, 0, 0.7);"></span>
-                        </a>
-                        </div>
-                        <h5 class="link mbr-black mbr-fonts-style display-7">
-                            <p>Contactame por Linkedin</p>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+  <!-- Iconos y Texto -->
+    <div class="row justify-content-center align-items-center pt-5">
+      
+      <!-- Opción Mail -->
+      <div class="contact-links col-12 col-md-5 mb-4 mb-md-0">
+        <a href="mailto:agustinfara@gmail.com" target="_blank" class="text-decoration-none text-dark d-inline-block">
+            <span class="socicon-mail socicon text-decoration-none" style="font-size: 75px;"></span>
+        </a>
+        <p class="h5 font-weight-normal text-dark mb-0 text-decoration-none">
+            {% translate "Enviame un correo" %}
+        </p>
+
+      </div>
+
+      <!-- Opción LinkedIn -->
+      <div class="contact-links col-12 col-md-5 mb-4 mb-md-0">
+        <a href="https://www.linkedin.com/in/agustinjosefara/" target="_blank" class="text-decoration-none text-dark d-inline-block">
+            <span class="socicon-linkedin socicon text-decoration-none" style="font-size: 75px;"></span>
+        </a>
+        <p class="h5 font-weight-normal text-dark mb-0 text-decoration-none">
+            {% translate "Contactame por Linkedin" %}
+        </p>
+      
+      </div>
+
     </div>
-  </section>
+
+</section>
 {% endblock %}
 
 {% block content %}

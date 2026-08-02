@@ -1,58 +1,73 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 
-{% block title %}Tecnologías{% endblock %}
+{% block title %}{% translate "Tecnologías" %}{% endblock %}
 
-{% block bkg_img %}{% load static %}{% static '/core/img/about-bg.jpg' %}{% endblock %}
 
 {% block header %}
-<section class="header1 bkg-wood mbr-parallax-background" id="header1-f" style="padding-top: 8rem; padding-bottom: 8rem;">
-    <div class="mbr-overlay" style="opacity: 0.5; background-color: #65C6D4;"></div>
-    <div class="align-center container">
-        <div class="row justify-content-center mt-4 mt-md-5">
-            <div class="col-12 col-lg-8">
-                <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1"><strong>Tecnologías</strong></h1>
-            </div>
-        </div>
+<section class="bkg-wood position-relative" id="tecnologias" style="padding-top: 8rem; padding-bottom: 8rem;">
+  
+  <!-- Overlay turquesa que cubre toda la altura del banner -->
+  <div class="tech-overlay position-absolute"></div>
+
+  <!-- Contenido centrado verticalmente -->
+  <div class="container text-center position-relative" style="z-index: 2;">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-8">
+        <h1 class="tech-title">
+          {% translate "Tecnologías" %}
+        </h1>
+      </div>
     </div>
+  </div>
+
 </section>
+
 {% endblock %}
 
 {% block content %}
-<section class="clients2 cid-sjsHGKf7dW" id="clients2-r">
-    <div class="container-fluid">
-        {% for category in categories %}
-            
-            <div class="row justify-content-center">
-                <div class="mbr-section-title mbr-fonts-style display-7">
-                    <h3 class="mt-5">{{ category.name }}</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 my-md-3 my-md-3"></div>
-            </div>
+<section class="py-5" id="tecnologias-list">
+  <div class="container">
+    {% for category in categories %}
+      
+      <!-- Título de Categoría (Lenguajes, Frameworks, etc.) -->
+      <div class="row justify-content-center text-center mb-4">
+        <div class="col-12">
+          <h2 class="h3 font-weight-bold text-dark mt-4">
+            {{ category.name }}
+          </h2>
+        </div>
+      </div>
 
-            <div class="row justify-content-center">
-                {% for tech in category.technologies.all %}
-                <div class="card col-12 col-md-6 col-lg-4">
-                    <div class="card-wrapper">
-                        <div class="img-wrapper">
-                            {{ tech.icon_svg|safe }}
-                        </div>
-                        <div class="card-box align-center">
-                            <h5 class="card-title mbr-fonts-style mb-3 display-5">
-                                <strong>{{ tech.name }}</strong>
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
+      <!-- Grilla de Tecnologías -->
+      <div class="row justify-content-center align-items-stretch">
+        {% for tech in category.technologies.all %}
+          <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 border-0 text-center p-3">
+              
+              <!-- Contenedor del Icono SVG -->
+              <div class="d-flex justify-content-center align-items-center mb-3" style="min-height: 80px;">
+                {{ tech.icon_svg|safe }}
+              </div>
 
-            <div class="row">
-                <div class="col-12 my-4 my-md-5"></div>
-            </div>
+              <!-- Nombre de la Tecnología -->
+              <div class="card-body p-0 d-flex align-items-center justify-content-center">
+                <h3 class="h5 card-title font-weight-bold mb-0 text-dark">
+                  {{ tech.name }}
+                </h3>
+              </div>
 
+            </div>
+          </div>
         {% endfor %}
-    </div>
+      </div>
+
+      <!-- Separador entre categorías -->
+      {% if not forloop.last %}
+        <hr class="my-5 opacity-25">
+      {% endif %}
+
+    {% endfor %}
+  </div>
 </section>
 {% endblock %}

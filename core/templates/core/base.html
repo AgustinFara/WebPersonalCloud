@@ -1,136 +1,77 @@
 {% load static %}
+{% load i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
 
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Agustín José Fara">
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="description" property="og:description" content="Página web personal desarrollada por Agustín José Fara para compartir curriculum Vitae, conocimientos, proyectos y formas de contacto.">
-  <meta name="author" content="Agustín José Fara">
-  <meta property="og:type" content="website">
-  <meta name="twitter:title" content="Home">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <meta name="generator" content="Agustín José Fara">
+  <meta name="author" content="Agustín José Fara">
+  <meta name="description" property="og:description" content="{% translate 'Página web personal desarrollada por Agustín José Fara para compartir curriculum Vitae, conocimientos, proyectos y formas de contacto.' %}">
+  <meta property="og:type" content="website">
 
+  <!-- Titulo de la pestaña -->
+  <title>{% translate "Mi web personal |" %} {% block title %}{% endblock %}</title>
 
-  <title>Mi web personal | {% block title %}{% endblock %}</title>
-  <link rel="stylesheet" href="{% static 'core/assets/web/assets/mobirise-icons2/mobirise2.css' %}">
-  <link rel="stylesheet" href="{% static 'core/assets/tether/tether.min.css' %}">
-  <link rel="stylesheet" href="{% static 'core/assets/bootstrap/css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'core/assets/bootstrap/css/bootstrap-grid.min.css' %}">
-  <link rel="stylesheet" href="{% static 'core/assets/bootstrap/css/bootstrap-reboot.min.css' %}">
-  <link rel="stylesheet" href="{% static 'core/assets/dropdown/css/style.css' %}">
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="{% static 'core/img/AJF_ico.png' %}">
+
+  <!--Icons CSS -->
   <link rel="stylesheet" href="{% static 'core/assets/socicon/css/styles.css' %}">
-  <link rel="stylesheet" href="{% static 'core/assets/theme/css/style.css' %}">
-  <link rel="stylesheet" href="{% static 'core/assets/mobirise/css/timeline.css' %}">
-  <link rel="stylesheet" href="{% static 'core/assets/mobirise/css/backgrounds.css' %}">
-  <link rel="preload" as="style" href="{% static 'core/assets/mobirise/css/mbr-additional.css' %}">
-  <link rel="stylesheet" href="{% static 'core/assets/mobirise/css/mbr-additional.css' %}" type="text/css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@master/devicon.min.css">
-  <link href="{% static 'core/css/clean-blog.min.css' %}" rel="stylesheet">
-  <link rel="shortcut icon" type="image" href="{% static '/core/img/AJF_ico.png' %}">
 
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  
+  <!-- CSS custom para la web -->
+  <link href="{% static 'core/css/webpersonal.css' %}" rel="stylesheet">
+  <!-- Añado un extra CSS, para paginas que requierar un css adicional -->
+  {% block extra_css %}{% endblock %}
 </head>
 
+<!-- Body -->
+<body class="d-flex flex-column min-vh-100">
 
-<body>
+  <!-- Navbar -->
+  {% include 'core/includes/navbar.html' %}
 
-  <!-- Body Navbar -->
-  <section class="menu cid-s48OLK6784" once="menu" id="menu1-h">
-    <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
-      <div class="container-fluid">
-        <div class="navbar-brand">
-          <span class="navbar-logo">
-            <a href="{% url 'core:home' %}">
-            <div class="img-wrapper">
-             <svg width="14.869582mm" height="7.0111458mm" viewBox="0 0 148.69582 70.111458" version="1.1" id="svg1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defsid="defs1" /><g id="layer1" transform="translate(-31.488204,-11.779066)"><path id="path26" style="fill:#2b0000" d="m 103.85174,81.859153 c -1.01864,-0.0176 -2.59005,-0.12806 -3.49202,-0.24548 -0.901961,-0.11743 -2.390241,-0.41389 -3.307291,-0.65881 l -1.66735,-0.44531 -2.164731,-1.04635 -2.16473,-1.04635 -1.799882,-1.51167 -1.799882,-1.51167 -1.263446,-1.56829 c -0.694896,-0.86256 -1.67114,-2.25269 -2.169431,-3.08918 -0.498291,-0.83648 -1.341679,-2.60986 -1.874195,-3.940846 l -0.968211,-2.419965 0.227151,-0.22715 c 0.124932,-0.124933 1.535009,-0.716608 3.133503,-1.314834 1.598494,-0.598225 4.379143,-1.614381 6.179219,-2.258124 1.800077,-0.643742 3.299278,-1.17044 3.331558,-1.17044 0.03228,0 0.210117,0.506015 0.395197,1.124479 0.18507,0.618463 0.69404,1.838854 1.13103,2.711979 0.437,0.873125 1.2005,2.087588 1.69667,2.698806 l 0.90214,1.111306 1.71857,0.846049 1.718581,0.84605 1.91253,0.0217 1.91252,0.0217 1.3313,-0.45979 1.3313,-0.45979 0.97668,-0.805062 0.97668,-0.805062 0.76982,-1.640256 c 0.4234,-0.902141 0.91338,-2.25971 1.08885,-3.01682 l 0.31903,-1.376564 0.0489,-18.001005 0.0489,-18.001004 -9.79568,-0.06931 -9.795692,-0.06931 -0.07917,-5.027084 -0.07917,-5.027083 0.161527,-1.124479 0.161528,-1.124479 h 16.784827 16.78483 v 13.095499 13.095497 l 24.40781,0.06752 24.40781,0.06752 0.071,6.151562 0.071,6.151562 h -14.16011 -14.16009 v 15.08125 15.08125 h -7.14375 -7.14375 V 65.489473 50.408223 h -3.14629 -3.14629 l -0.13043,5.88698 -0.13044,5.886979 -0.53241,2.414843 -0.53242,2.414843 -0.93019,2.281595 -0.9302,2.2816 -1.20409,1.68738 -1.20408,1.68737 -1.73536,1.59014 -1.73535,1.59013 -1.84525,0.96965 c -1.01489,0.53331 -2.5303,1.2072 -3.36758,1.49754 l -1.52233,0.52788 -2.51354,0.38268 -2.51354,0.38269 z m -64.651437,-1.34995 -7.712099,0.0701 v -0.20708 c 0,-0.1139 0.781808,-2.11 1.73735,-4.43577 0.955543,-2.32578 3.206733,-7.86009 5.002645,-12.298478 1.795913,-4.438385 4.236507,-10.451042 5.423543,-13.361458 1.187037,-2.910417 3.152491,-7.732448 4.367675,-10.715625 1.215185,-2.983177 3.356,-8.221927 4.757367,-11.641666 1.401367,-3.41974 3.393341,-8.301302 4.426609,-10.847917 1.033268,-2.546614 1.994942,-4.779036 2.137053,-4.960937 l 0.258384,-0.330729 h 7.20795 7.207949 l 1.2662,2.976562 c 0.69641,1.637109 2.192348,5.119687 3.324305,7.739062 1.131958,2.619375 3.316668,7.70932 4.854912,11.310987 1.538244,3.601668 2.796807,6.598178 2.796807,6.658911 0,0.06073 -1.16086,0.492205 -2.579688,0.958828 -1.418828,0.466623 -4.282013,1.502632 -6.362633,2.302241 -2.080619,0.79961 -3.825978,1.409912 -3.878573,1.356226 -0.05259,-0.05368 -1.338853,-3.193235 -2.85835,-6.976776 -1.519498,-3.783542 -2.982659,-7.50446 -3.25147,-8.268707 l -0.488747,-1.389538 -0.197496,0.198915 c -0.108623,0.109403 -0.72709,1.568134 -1.374372,3.241623 -0.647281,1.67349 -2.867859,7.269427 -4.934619,12.435417 -2.066759,5.165989 -4.100757,10.315852 -4.519995,11.444139 l -0.762251,2.051431 0.853576,-0.372181 c 0.469467,-0.2047 2.699045,-1.226066 4.954618,-2.269702 2.255573,-1.043636 5.600937,-2.538744 7.434142,-3.322463 1.833206,-0.783718 4.869299,-2.04062 6.746875,-2.793116 1.877576,-0.752495 5.374113,-2.069294 7.770081,-2.926219 2.395969,-0.856925 5.737786,-1.97109 7.42626,-2.475921 1.688475,-0.504832 4.750248,-1.333817 6.803948,-1.84219 2.0537,-0.508373 5.240171,-1.224006 7.081051,-1.590296 1.84088,-0.36629 3.51603,-0.665982 3.72256,-0.665982 h 0.3755 v 5.759862 5.759862 l -4.16719,1.009728 -4.167191,1.009728 -6.652304,2.220724 c -3.65877,1.221399 -9.195176,3.221621 -12.303125,4.444938 -3.107948,1.223317 -7.436753,2.961432 -9.619565,3.862478 -2.182813,0.901046 -4.92125,2.060946 -6.085417,2.577556 -1.164166,0.516609 -3.902604,1.805243 -6.085416,2.863623 -2.182813,1.05838 -4.720414,2.41468 -5.639115,3.01399 -0.9187,0.59932 -2.244219,1.62644 -2.945597,2.2825 -0.701379,0.65605 -1.604097,1.66738 -2.006041,2.24738 l -0.730808,1.05456 -0.451599,1.3856 -0.451599,1.3856 z M 139.96737,33.739481 h -7.14375 V 22.759273 11.779065 h 23.68021 23.6802 v 6.217708 6.217708 h -16.53645 -16.53646 v 4.7625 4.7625 z" /></g></svg>
-            </div>
-            </a>
-          </span>
-        </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
-            <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="{% url 'cv:about' %}">Sobre mí</a></li>
-            <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="{% url 'cv:tech' %}">Tecnologías</a></li>
-            <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="{% url 'cv:cv' %}">Experiencia Laboral</a></li>
-            <li class="nav-item"><a class="nav-link link text-black display-4" href="{% url 'portfolio:portfolio' %}">Proyectos</a></li>
-            <li class="nav-item"><a class="nav-link link text-black display-4" href="{% url 'portfolio:cursos' %}">Cursos</a></li>
-            <li class="nav-item"><a class="nav-link link text-black display-4" href="{% url 'core:contact' %}">Contacto</a></li>
-          </ul>
-        </div>
+  <main class="flex-grow-1 d-flex flex-column">
+
+    <!-- Bloque Header -->
+    {% block header%}
+    {% endblock %}
+
+    <!-- Bloque Contenido Principal -->
+    <section class="content">
+      <div class="container">
+        {% block content %}
+        {% endblock %}
       </div>
-    </nav>
-  </section>
+    </section>
 
-  <!-- Body Header -->
-          {% block header%}
-          {% endblock %}
+  </main>
 
-<!-- Contenido Principal -->
-<!-- Salto de página -->
-  {% if request.path != "/" %}
-  <section class="content">
-    <div class="container">
-      {% block content %}
-      {% endblock %}
-    </div>
-  </section>
-  {% endif %}
+  <!-- Pie de página -->
+  {% include 'core/includes/footer.html' %}
 
 
-<!-- Pié de página -->
-  <section class="footer3 cid-sjs4XhV3Lm" once="footers" id="footer3-n">
-    <div class="container">
-      <div class="media-container-row align-center mbr-white">
-        <div class="row social-row">
-          <div class="social-list align-right pb-2">
-            <div class="soc-item">
-              <a href="https://www.linkedin.com/in/agust%C3%ADn-f-7683561ba/" target="_blank">
-                <span class="mbr-iconfont mbr-iconfont-social socicon-linkedin socicon" style="color: rgb(34, 153, 170); fill: rgb(34, 153, 170);"></span>
-              </a>
-            </div>
-            <div class="soc-item">
-              <a href="https://github.com/AgustinFara/" target="_blank">
-                <span class="mbr-iconfont mbr-iconfont-social socicon-github socicon" style="color: rgb(34, 153, 170); fill: rgb(34, 153, 170);"></span>
-              </a>
-            </div>
-            <div class="soc-item">
-              <a href="mailto:agustinfara@gmail.com" target="_blank">
-                <span class="mbr-iconfont mbr-iconfont-social socicon-mail socicon" style="color: rgb(34, 153, 170); fill: rgb(34, 153, 170);"></span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="row row-copirayt">
-          <p class="mbr-text mb-0 mbr-fonts-style mbr-white align-center display-7">
-            Copyright © {% now "Y" %} · Agustín José Fara
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- Js. Al final de la página -->
+
+  <!-- jQuery, Popper.js, y Bootstrap 4 JS por CDN -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+  <!-- JS de Bootstrap 4.6.2 
+  <script src="{% static 'core/assets/web/assets/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'core/assets/bootstrap/js/bootstrap.min.js' %}"></script>  -->
+  
+  <!-- Añado un extra js, para paginas que requierar un js adicional -->
+  {% block extra_js %}{% endblock %}
 
 </body>
-
-<script src="{% static 'core/assets/web/assets/jquery/jquery.min.js' %}"></script>
-<script src="{% static 'core/assets/popper/popper.min.js' %}"></script>
-<script src="{% static 'core/assets/tether/tether.min.js' %}"></script>
-<script src="{% static 'core/assets/bootstrap/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'core/assets/smoothscroll/smooth-scroll.js' %}"></script>
-<script src="{% static 'core/assets/parallax/jarallax.min.js' %}"></script>
-<script src="{% static 'core/assets/dropdown/js/nav-dropdown.js' %}"></script>
-<script src="{% static 'core/assets/dropdown/js/navbar-dropdown.js' %}"></script>
-<script src="{% static 'core/assets/touchswipe/jquery.touch-swipe.min.js' %}"></script>
-
 </html>

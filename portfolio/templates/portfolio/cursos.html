@@ -1,40 +1,75 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 
-{% block title %}Cursos{% endblock %}
+{% block title %}{% translate "Cursos" %}{% endblock %}
 
-{% block bkg_img %}{% load static %}{% static '/core/img/cursos-bg.jpg' %}{% endblock %}
 
 {% block header %}
-<section class="header1 bkg-wood mbr-parallax-background" id="header1-f" style="padding-top: 8rem; padding-bottom: 8rem;">
-    <div class="mbr-overlay" style="opacity: 0.5; background-color: #65C6D4;"></div>
-    <div class="align-center container">
-        <div class="row justify-content-center mt-4 mt-md-5">
-            <div class="col-12 col-lg-8">
-                <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1"><strong>Cursos</strong></h1>
-            </div>
-        </div>
+<section class="bkg-rock position-relative" id="cursos" style="padding-top: 8rem; padding-bottom: 8rem;">
+  
+  <!-- Overlay turquesa que cubre toda la altura del banner -->
+  <div class="tech-overlay position-absolute"></div>
+
+  <!-- Contenido centrado verticalmente -->
+  <div class="container text-center position-relative" style="z-index: 2;">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-8">
+        <h1 class="tech-title">
+          {% translate "Cursos" %}
+        </h1>
+      </div>
     </div>
+  </div>
+
 </section>
 {% endblock %}
 
-{% block content %}
- {% for course in courses %}
 
-      <div class="row project mb-5">
-         <div class="col-lg-3 col-md-4 offset-lg-1">
-            <img class="img-fluid" src="{{course.image.url}}" alt="">
-         </div>
-         <div class="col-lg-7 col-md-8">
-            <h2 class="section-heading title">{{course.title}}</h2>
-            <p class="text-muted mb-md"><small><i class="far fa-calendar-alt"></i> {{ course.date|date:"F \d\e Y" }}</small></p>
-            <p>{{course.description|linebreaks}}</p>
-            {% if course.archivo_pdf %}
-                <p><a href="{{ course.archivo_pdf.url }}" target="_blank" class="btn-outline-info btn-md">
-                <i class="far fa-file-pdf"></i> Ver PDF / Certificado
-                </a>
-            </p>
-            {% endif %}
-         </div>
+{% block content %}
+<section class="courses-section py-5">
+  <div class="container">
+
+    {% for course in courses %}
+      <div class="row course-item align-items-center mb-5">
+        
+        <!-- Columna de la Imagen/Certificado -->
+        <div class="col-lg-3 col-md-4 offset-lg-1 text-center text-md-start mb-3 mb-md-0">
+          {% if course.image %}
+            <img class="img-fluid rounded shadow-sm" src="{{ course.image.url }}" alt="{{ course.title }}" loading="lazy">
+          {% endif %}
+        </div>
+
+        <!-- Columna de Información del Curso -->
+        <div class="col-lg-7 col-md-8">
+          <h2 class="section-heading title h3 font-weight-bold text-dark mb-2">
+            {{ course.title }}
+          </h2>
+
+          <p class="text-muted mb-3">
+            <small>
+              <i class="far fa-calendar-alt me-1"></i> {{ course.date|date:"F \d\e Y" }}
+            </small>
+          </p>
+
+          <div class="course-description mb-3">
+            {{ course.description|linebreaks }}
+          </div>
+
+          {% if course.archivo_pdf %}
+            <div class="course-actions">
+              <a href="{{ course.archivo_pdf.url }}" 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="btn btn-outline-info btn-sm">
+                <i class="far fa-file-pdf me-1"></i> {% translate "Ver PDF / Certificado" %}
+              </a>
+            </div>
+          {% endif %}
+        </div>
+
       </div>
-   {% endfor %}
+    {% endfor %}
+
+  </div>
+</section>
 {% endblock %}

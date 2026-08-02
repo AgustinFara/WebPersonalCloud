@@ -133,3 +133,13 @@ staticfiles/
 
 #credenciales
 CredencialesBigQuery.json
+
+
+# Ruff
+.ruff_cache
+reporte_ruff.txt
+
+# Reporte de flake8
+reporte_flake8.txt
+
+

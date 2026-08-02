@@ -15,11 +15,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Technology',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=50)),
                 ('icon_svg', models.TextField(help_text='Pega aquí el código SVG')),
-                ('created', models.DateTimeField(auto_now_add=True, verbose_name='Cronomarcador de creación')),
-                ('updated', models.DateTimeField(auto_now=True, verbose_name='Cronomarcador de modificación')),
+                ('created', models.DateTimeField(auto_now_add=True,
+                 verbose_name='Cronomarcador de creación')),
+                ('updated', models.DateTimeField(auto_now=True,
+                 verbose_name='Cronomarcador de modificación')),
             ],
             options={
                 'verbose_name': 'Tecnología',
@@ -29,15 +32,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Work',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=200, verbose_name='Título')),
                 ('company', models.CharField(max_length=200, verbose_name='Empresa')),
                 ('description', models.TextField(verbose_name='Descripción')),
                 ('image', models.ImageField(upload_to='work', verbose_name='Imagen')),
                 ('datestart', models.DateField(verbose_name='Fecha de comienzo')),
-                ('datefinish', models.DateField(verbose_name='Fecha de finalización')),
-                ('created', models.DateTimeField(auto_now_add=True, verbose_name='Cronomarcador de creación')),
-                ('updated', models.DateTimeField(auto_now=True, verbose_name='Cronomarcador de modificación')),
+                ('datefinish', models.DateField(
+                    verbose_name='Fecha de finalización')),
+                ('created', models.DateTimeField(auto_now_add=True,
+                 verbose_name='Cronomarcador de creación')),
+                ('updated', models.DateTimeField(auto_now=True,
+                 verbose_name='Cronomarcador de modificación')),
             ],
             options={
                 'verbose_name': 'Trabajo',
@@ -48,15 +55,23 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Client',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('company', models.CharField(blank=True, max_length=200, null=True, verbose_name='Empresa Cliente')),
-                ('image', models.ImageField(blank=True, null=True, upload_to='work', verbose_name='Imagen Cliente')),
-                ('description', models.TextField(blank=True, null=True, verbose_name='Descripción')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('company', models.CharField(blank=True, max_length=200,
+                 null=True, verbose_name='Empresa Cliente')),
+                ('image', models.ImageField(blank=True, null=True,
+                 upload_to='work', verbose_name='Imagen Cliente')),
+                ('description', models.TextField(
+                    blank=True, null=True, verbose_name='Descripción')),
                 ('datestart', models.DateField(verbose_name='Fecha de comienzo')),
-                ('datefinish', models.DateField(verbose_name='Fecha de finalización')),
-                ('created', models.DateTimeField(auto_now_add=True, verbose_name='Cronomarcador de creación')),
-                ('updated', models.DateTimeField(auto_now=True, verbose_name='Cronomarcador de modificación')),
-                ('client', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='cv.work', verbose_name='Empresa Cliente')),
+                ('datefinish', models.DateField(
+                    verbose_name='Fecha de finalización')),
+                ('created', models.DateTimeField(auto_now_add=True,
+                 verbose_name='Cronomarcador de creación')),
+                ('updated', models.DateTimeField(auto_now=True,
+                 verbose_name='Cronomarcador de modificación')),
+                ('client', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                 to='cv.work', verbose_name='Empresa Cliente')),
             ],
             options={
                 'verbose_name': 'Cliente',

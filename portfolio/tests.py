@@ -1,6 +1,9 @@
-from django.test import TestCase
-from .models import Project, Course
 from datetime import date
+
+from django.test import TestCase
+
+from .models import Course, Project
+
 
 class ProjectModelTest(TestCase):
     def setUp(self):
@@ -18,10 +21,12 @@ class ProjectModelTest(TestCase):
 
     def test_project_ordering(self):
         """Verifica que el orden sea por fecha descendente"""
-        Project.objects.create(title="Proyecto Antiguo", description="...", date=date(2020, 1, 1))
+        Project.objects.create(title="Proyecto Antiguo",
+                               description="...", date=date(2020, 1, 1))
         projects = Project.objects.all()
         # El proyecto más reciente (2023) debería estar en la posición 0
         self.assertEqual(projects[0].title, "Proyecto Test")
+
 
 class CourseModelTest(TestCase):
     def setUp(self):

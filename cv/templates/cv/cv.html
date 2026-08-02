@@ -1,73 +1,116 @@
 {% extends 'core/base.html' %}
+{% load static %}
+{% load i18n %}
 
-{% block title %}Experiencia Laboral{% endblock %}
+{% block title %}{% translate "Experiencia Laboral" %}{% endblock %}
 
-{% block bkg_img %}{% load static %}{% static '/core/img/about-bg.jpg' %}{% endblock %}
 
+
+{% block extra_css %}
+
+{% endblock %}
 
 {% block header %}
-<section class="header1 bkg-wood mbr-parallax-background" id="header1-f" style="padding-top: 8rem; padding-bottom: 8rem;">
-    <div class="mbr-overlay" style="opacity: 0.5; background-color: #65C6D4;"></div>
-    <div class="align-center container">
-        <div class="row justify-content-center mt-4 mt-md-5">
-            <div class="col-12 col-lg-8">
-                <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1"><strong>Experiencia Laboral</strong></h1>
-            </div>
-        </div>
+<section class="bkg-water position-relative" id="cv" style="padding-top: 8rem; padding-bottom: 8rem;">
+  
+  <!-- Overlay turquesa que cubre toda la altura del banner -->
+  <div class="tech-overlay position-absolute"></div>
+
+  <!-- Contenido centrado verticalmente -->
+  <div class="container text-center position-relative" style="z-index: 2;">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-8">
+        <h1 class="tech-title">
+          {% translate "Experiencia Laboral" %}
+        </h1>
+      </div>
     </div>
+  </div>
+
 </section>
+
 {% endblock %}
 
 {% block content %}
-<!-- timeline -->
-<section class="timeline1 timeline" id="timeline1-s">
+<section class="timeline-container py-4">
+  <div class="timeline">
+    
+    {% for work in works %}
+      {% if work.client_set.all %}
+        <!-- Caso A: Si la empresa TIENE clientes -->
+        <div class="timeline-item">
+          <div class="timeline-badge">
+            {% if work.image %}
+              <img src="{{ work.image.url }}" alt="{{ work.company }}">
+            {% else %}
+              <div class="badge-placeholder"></div>
+            {% endif %}
+          </div>
 
-   {% for work in works %}
+          <div class="timeline-content">
+            <h3 class="timeline-title">
+              {{ work.title }} {% translate "en" %} <strong>{{ work.company }}</strong>
+            </h3>
+            <p class="timeline-date">
+              {{ work.date_started }} - {{ work.date_finished }} &nbsp; <span>({{ work.time_worked }})</span>
+            </p>
+          </div>
+        </div>
 
-      <div class="row timeline-element mb-2">
-         <div class="col-12 align-left">
-            <div class="timeline-text-wrapper">
-               <p class="mbr-timeline-title mbr-fonts-style display-5">
-                  <strong>{{work.title}} en {{work.company}}</strong>
-               </p>
-               <p class="mbr-timeline-title mbr-fonts-style display-5">
-                  <i >{{work.date_started}} - {{work.date_finished}} &nbsp; ( {{work.time_worked}} )</i>
-               </p>
+        {% for client in work.client_set.all %}
+          <!-- Si es el último trabajo Y el último cliente de ese trabajo, le agregamos 'is-last' -->
+          <div class="timeline-item timeline-subitem {% if forloop.parentloop.last and forloop.last %}is-last{% endif %}">
+            <div class="timeline-badge sub-badge">
+              {% if client.image %}
+                <img src="{{ client.image.url }}" alt="{{ client.company }}">
+              {% else %}
+                <div class="badge-placeholder"></div>
+              {% endif %}
             </div>
-         </div>
-         <img class="iconBackground" src={{work.image.url}} alt={{work.company}}>
-      {% for client in work.client_set.all %}
-      </div>
-      <div class="row timeline-element mb-2">
-         <div class="col-12">
-            <div class="timeline-subtext-wrapper">
-               <h4 class="mbr-timeline-title mbr-fonts-style display-7 align-left">
-                  <strong >Cliente: {{client.company}}</strong>
-                  <p><i>{{client.date_started}} - {{client.date_finished}} &nbsp; ( {{work.time_worked}} )</i></p>
-                  <p>{{client.description|linebreaks}}</p>
-               </h4>
+
+            <div class="timeline-content">
+              <h4 class="timeline-subtitle">
+                {% translate "Cliente:" %} <strong>{{ client.company }}</strong>
+              </h4>
+              <p class="timeline-date">
+                {{ client.date_started }} - {{ client.date_finished }} &nbsp; <span>({{ client.time_worked }})</span>
+              </p>
+              <div class="timeline-body mt-2">
+                {{ client.description|linebreaks }}
+              </div>
             </div>
-         </div>
-         <img class="subIconBackground" src={{client.image.url}} alt={{client.company}}>
-      {% if client ==  work.client_set.last %}
-      </div>
+          </div>
+        {% endfor %}
+
+      {% else %}
+        <!-- Caso B: Si la empresa NO TIENE clientes -->
+        <div class="timeline-item {% if forloop.last %}is-last{% endif %}">
+          <div class="timeline-badge">
+            {% if work.image %}
+              <img src="{{ work.image.url }}" alt="{{ work.company }}">
+            {% else %}
+              <div class="badge-placeholder"></div>
+            {% endif %}
+          </div>
+
+          <div class="timeline-content">
+            <h3 class="timeline-title">
+              {{ work.title }} {% translate "en" %} <strong>{{ work.company }}</strong>
+            </h3>
+            <p class="timeline-date">
+              {{ work.date_started }} - {{ work.date_finished }} &nbsp; <span>({{ work.time_worked }})</span>
+            </p>
+
+            <div class="timeline-body mt-3">
+              {{ work.description|linebreaks }}
+            </div>
+          </div>
+        </div>
       {% endif %}
-      {% empty %}
-         <div class="col-12  align-left">
-            <div class="timeline-text-wrapper display-7">
-                  {{work.description|linebreaks}}
-            </div>
-         </div>
-      </div>
-      {% endfor %}
 
-      {% if work ==  works.last %}
-      <div class="row timeline-element mb-2">
-         <span class="iconBackgroundEnd"></span>
-      </div>
-      {% endif %}
-   {% endfor %}
-   </div>
+    {% endfor %}
+
+  </div>
 </section>
 {% endblock %}
 

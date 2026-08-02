@@ -1,32 +1,39 @@
 {% extends 'core/base.html' %}
+{% load i18n %}
 
-{% block title %}Extracto{% endblock %}
+{% block title %}{% translate "Sobre mí" %}{% endblock %}
 
-{% block bkg_img %}{% load static %}{% static '/core/img/about-bg.jpg' %}{% endblock %}
+{% block bkg_img %}{% load static %}{% static 'core/img/about-bg.jpg' %}{% endblock %}
 
 {% block header %}
-<section class="header14 cid-sjszbbG0fd mbr-fullscreen mbr-parallax-background" id="header14-o">
-   <div class="mbr-overlay" style="opacity: 0.5; background-color: #65C6D4;">
-   </div>
-   <div class="container-fluid">
-      <div class="row justify-content-center align-items-center">
-         <div class="col-12 col-md col-lg-2 image-wrapper">
-            <img style="border-radius: 100%" src="{% static '/core/img/Fotodeperfil.jpg' %}" alt="Agustín Fara">
-         </div>
-         <div class="col-12 col-md col-lg-8">
-            <div class="text-wrapper">
-               <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1">
-             {#  <strong>Extracto  </strong></h1> #}
-               <p class="mbr-text mbr-fonts-style display-7" style="text-align: justify"><br>Mi nombre es Agustín José Fara, nací y crecí en la Argentina, actualmente tengo {{ edad }} años. Estoy casado y vivo en San Miguel, Gran Buenos Aires. Soy analista programador senior con {{ exp_mainframe }} años de trayectoria trabajando el ciclo de vida completo de desarrollo de software en entornos bancarios. Experto en el ecosistema Mainframe (COBOL, CICS, DB2, BATCH) , con una gran capacidad analítica para traducir reglas de negocio complejas en soluciones técnicas eficientes. Mi experiencia abarca desde el relevamiento y análisis funcional hasta la implementación y certificación (QA). Poseo una actitud proactiva y una constante curiosidad técnica, evidenciada en el desarrollo de proyectos personales fuera del ámbito laboral, como la creación y despliegue de mi propio CV Digital utilizando Python, Django, Docker y Google Cloud. Puedo desempeñarme en roles de análisis, QA, y desarrollador.&nbsp;<br>
-               </p>
-            </div>
-         </div>
+<section class="bkg-watercolor position-relative py-5 flex-grow-1 d-flex align-items-center" id="sobre-mi">
+  
+  <!-- Overlay turquesa de fondo -->
+  <div class="position-absolute w-100 h-100 top-0 start-0" style="background-color: #65C6D4; opacity: 0.5; z-index: 1;"></div>
+
+  <div class="container position-relative py-4" style="z-index: 2;">
+    <!-- d-flex flex-column flex-md-row asegura centrado en mobile -->
+    <div class="row justify-content-center align-items-center">
+      
+      <!-- Foto centrada en mobile con mx-auto -->
+      <div class="col-12 col-md-4 col-lg-3 d-flex justify-content-center mb-4 mb-md-0">
+        <img src="{% static 'core/img/Fotodeperfil.jpg' %}" alt="Agustín Fara" class="img-fluid rounded-circle shadow mx-auto d-block" style="max-width: 200px; width: 100%;">
       </div>
-   </div>
+
+      <!-- Texto -->
+      <div class="col-12 col-md-8 col-lg-8">
+        <div class="text-white text-center text-md-left">
+          <p class="about-text mb-0" style="text-align: justify; line-height: 1.4;">
+            {% blocktranslate %}Mi nombre es Agustín José Fara, nací y crecí en la Argentina, actualmente tengo {{ edad }} años. Estoy casado y vivo en San Miguel, Gran Buenos Aires. Soy analista programador senior con {{ exp_mainframe }} años de trayectoria trabajando el ciclo de vida completo de desarrollo de software en entornos bancarios. Experto en el ecosistema Mainframe (COBOL, CICS, DB2, BATCH) , con una gran capacidad analítica para traducir reglas de negocio complejas en soluciones técnicas eficientes. Mi experiencia abarca desde el relevamiento y análisis funcional hasta la implementación y certificación (QA). Poseo una actitud proactiva y una constante curiosidad técnica, evidenciada en el desarrollo de proyectos personales fuera del ámbito laboral, como la creación y despliegue de mi propio CV Digital utilizando Python, Django, Docker y Google Cloud. Puedo desempeñarme en roles de análisis, QA, y desarrollador.{% endblocktranslate %}
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </section>
 {% endblock %}
 
 {% block content %}
 {% endblock %}
-
-

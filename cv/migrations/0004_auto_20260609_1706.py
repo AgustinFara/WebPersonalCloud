@@ -14,12 +14,14 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='category',
             name='created',
-            field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now, verbose_name='Cronomarcador de creación'),
+            field=models.DateTimeField(
+                auto_now_add=True, default=django.utils.timezone.now, verbose_name='Cronomarcador de creación'),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='category',
             name='updated',
-            field=models.DateTimeField(auto_now=True, verbose_name='Cronomarcador de modificación'),
+            field=models.DateTimeField(
+                auto_now=True, verbose_name='Cronomarcador de modificación'),
         ),
     ]

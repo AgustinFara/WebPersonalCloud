@@ -12,16 +12,19 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='work',
-            options={'ordering': ['-datestart'], 'verbose_name': 'Trabajo', 'verbose_name_plural': 'Trabajos'},
+            options={'ordering': [
+                '-datestart'], 'verbose_name': 'Trabajo', 'verbose_name_plural': 'Trabajos'},
         ),
         migrations.AddField(
             model_name='work',
             name='is_current',
-            field=models.BooleanField(default=False, verbose_name='¿Es mi trabajo actual?'),
+            field=models.BooleanField(
+                default=False, verbose_name='¿Es mi trabajo actual?'),
         ),
         migrations.AlterField(
             model_name='work',
             name='datefinish',
-            field=models.DateField(blank=True, null=True, verbose_name='Fecha de finalización'),
+            field=models.DateField(blank=True, null=True,
+                                   verbose_name='Fecha de finalización'),
         ),
     ]

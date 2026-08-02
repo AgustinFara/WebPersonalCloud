@@ -1,23 +1,21 @@
-from django.shortcuts import render, HttpResponse
-from google.cloud import bigquery
 import json
-from django.urls import reverse
-from django.utils.text import slugify
 from datetime import date, timedelta
-from django.utils import timezone
 
+from django.shortcuts import render
+from django.urls import reverse
+from django.utils import timezone
+from django.utils.text import slugify
+from google.cloud import bigquery
 
 # Create your views here.
 
 def home(request):
     return render(request, "core/home.html")
 
+
 def contact(request):
     return render(request, "core/contact.html")
 
-
-from django.shortcuts import render
-import json
 
 def chart(request, fecha=None):
     data = obtener_datos_bq(fecha)
@@ -26,7 +24,6 @@ def chart(request, fecha=None):
     hay_datos = bool(children)
 
     data_json = json.dumps(data)
-
 
     return render(request, "core/chart.html", {
         'data_jerarquica': data_json,
@@ -37,6 +34,7 @@ def chart(request, fecha=None):
         'hoy': data['hoy'],
     })
 
+
 def obtener_datos_bq(fecha=None):
 
     # 1. Definir fecha_actual
@@ -44,7 +42,7 @@ def obtener_datos_bq(fecha=None):
         fecha_actual = date.fromisoformat(fecha)
     else:
         fecha_actual = timezone.localdate()
-    
+
     # 2. Calcular fechas relativas
     fecha_str = fecha_actual.strftime('%Y-%m-%d')
     fecha_anterior = (fecha_actual - timedelta(days=1)).strftime('%Y-%m-%d')
@@ -75,13 +73,13 @@ def obtener_datos_bq(fecha=None):
             bigquery.ScalarQueryParameter("fecha", "STRING", fecha_str)
         ]
     )
-    
-    try: 
-        #LE paso el job config al query
+
+    try:
+        # LE paso el job config al query
         query_job = client.query(query, job_config=job_config)
         rows = list(query_job)
         if rows:
-        # Construimos la lista con el campo 'link' extra
+            # Construimos la lista con el campo 'link' extra
             children = []
             for row in rows:
                 child = dict(row)
@@ -93,39 +91,40 @@ def obtener_datos_bq(fecha=None):
                 })
                 children.append(child)
 
-            data = { 
-                    "name": "root",
-                    "children": children,
-                    'fecha': fecha_str,
-                    'fecha_ant': fecha_anterior,
-                    'fecha_sig': fecha_siguiente,
-                    'hoy': hoy_str,
-                    }
+            data = {
+                "name": "root",
+                "children": children,
+                'fecha': fecha_str,
+                'fecha_ant': fecha_anterior,
+                'fecha_sig': fecha_siguiente,
+                'hoy': hoy_str,
+            }
         else:
-            data = { 
-                    "name": None,
-                    "children": None,
-                    'fecha': fecha_str,
-                    'fecha_ant': fecha_anterior,
-                    'fecha_sig': fecha_siguiente,
-                    'hoy': hoy_str,
-                    }
-            
+            data = {
+                "name": None,
+                "children": None,
+                'fecha': fecha_str,
+                'fecha_ant': fecha_anterior,
+                'fecha_sig': fecha_siguiente,
+                'hoy': hoy_str,
+            }
+
     except Exception as e:
         print(f"Error en consulta BigQuery: {e}")
-        
+
     return data
+
 
 def noticias_por_protagonista(request, nombre, fecha):
     # 1. Convertir 'lionel-messi' -> 'Lionel Messi'
     # Esto es una aproximación; lo ideal es que si tu base tiene nombres con mayúsculas,
     # uses el nombre formateado correctamente.
-    nombre_limpio = nombre.replace("-", " ").title() 
-    
+    nombre_limpio = nombre.replace("-", " ").title()
+
     print(f"DEBUG: Buscando noticias para: '{nombre_limpio}'")
 
     client = bigquery.Client()
-    
+
     # 2. Usar consultas parametrizadas (MUY RECOMENDADO por seguridad)
     query = """
         SELECT n.titulo, DATE(n.fecha_captura) as fecha, n.portal, COUNT(*) as frecuencia
@@ -137,30 +136,32 @@ def noticias_por_protagonista(request, nombre, fecha):
         GROUP BY titulo, portal, fecha
         ORDER BY frecuencia
     """
-    
+
     # Crear el job configurando los parámetros
     job_config = bigquery.QueryJobConfig(
         query_parameters=[
             bigquery.ScalarQueryParameter("nombre", "STRING", nombre_limpio),
-            bigquery.ScalarQueryParameter("fecha", "DATE", fecha) # Cambié a tipo DATE
+            bigquery.ScalarQueryParameter(
+                "fecha", "DATE", fecha)  # Cambié a tipo DATE
         ]
     )
-    
+
     query_job = client.query(query, job_config=job_config)
-    noticias = [dict(row) for row in query_job] # Convertir resultados a lista de diccionarios
+    # Convertir resultados a lista de diccionarios
+    noticias = [dict(row) for row in query_job]
 
 # CONVERSIÓN CRÍTICA: convertir fechas a string para que JS no rompa
     for n in noticias:
         if 'fecha' in n and hasattr(n['fecha'], 'strftime'):
             n['fecha'] = n['fecha'].strftime('%Y-%m-%d')
-    
+
     print(f"DEBUG: Se encontraron {len(noticias)} noticias.")
 
     import json
     noticias_json = json.dumps(noticias)
 
     return render(request, "core/noticias.html", {
-        'noticias': noticias, 
+        'noticias': noticias,
         'noticias_json': noticias_json,
         'protagonista': nombre_limpio,
         'fecha': fecha

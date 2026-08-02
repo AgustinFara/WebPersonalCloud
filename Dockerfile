@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y netcat-traditional \
     build-essential \
     zlib1g-dev \
     libjpeg-dev \
+    gettext \
     && rm -rf /var/lib/apt/lists/*
 
 # Configuración de entorno

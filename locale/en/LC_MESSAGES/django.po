@@ -1,0 +1,135 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-02 17:22-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: core/templates/core/base.html:15
+msgid ""
+"Página web personal desarrollada por Agustín José Fara para compartir "
+"curriculum Vitae, conocimientos, proyectos y formas de contacto."
+msgstr ""
+"Personal website developed by Agustín José Fara to share his "
+"Resume/CV, skills, projects, and contact information."
+
+#: core/templates/core/base.html:19
+msgid "Mi web personal |"
+msgstr "My personal website |"
+
+#: core/templates/core/contact.html:4 core/templates/core/contact.html:17
+#: core/templates/core/includes/navbar.html:27
+msgid "Contacto"
+msgstr "Contact"
+
+#: core/templates/core/contact.html:31
+msgid "Enviame un correo"
+msgstr "Send me an email"
+
+#: core/templates/core/contact.html:42
+msgid "Contactame por Linkedin"
+msgstr "Connect with me on LinkedIn"
+
+#: core/templates/core/home.html:24
+msgid "Analista Programador"
+msgstr "Software Engineer"
+
+#: core/templates/core/includes/navbar.html:22 cv/templates/cv/about.html:4
+msgid "Sobre mí"
+msgstr "About me"
+
+#: core/templates/core/includes/navbar.html:23 cv/templates/cv/tech.html:4
+#: cv/templates/cv/tech.html:18
+msgid "Tecnologías"
+msgstr "Technologies"
+
+#: core/templates/core/includes/navbar.html:24 cv/templates/cv/cv.html:5
+#: cv/templates/cv/cv.html:24
+msgid "Experiencia Laboral"
+msgstr "Work Experience"
+
+#: core/templates/core/includes/navbar.html:25
+#: portfolio/templates/portfolio/portfolio.html:4
+#: portfolio/templates/portfolio/portfolio.html:17
+msgid "Proyectos"
+msgstr "Projects"
+
+#: core/templates/core/includes/navbar.html:26
+#: portfolio/templates/portfolio/cursos.html:4
+#: portfolio/templates/portfolio/cursos.html:18
+msgid "Cursos"
+msgstr "Courses"
+
+#: cv/templates/cv/about.html:27
+#, python-format
+msgid ""
+"Mi nombre es Agustín José Fara, nací y crecí en la Argentina, actualmente "
+"tengo %(edad)s años. Estoy casado y vivo en San Miguel, Gran Buenos Aires. "
+"Soy analista programador senior con %(exp_mainframe)s años de trayectoria "
+"trabajando el ciclo de vida completo de desarrollo de software en entornos "
+"bancarios. Experto en el ecosistema Mainframe (COBOL, CICS, DB2, BATCH) , "
+"con una gran capacidad analítica para traducir reglas de negocio complejas "
+"en soluciones técnicas eficientes. Mi experiencia abarca desde el "
+"relevamiento y análisis funcional hasta la implementación y certificación "
+"(QA). Poseo una actitud proactiva y una constante curiosidad técnica, "
+"evidenciada en el desarrollo de proyectos personales fuera del ámbito "
+"laboral, como la creación y despliegue de mi propio CV Digital utilizando "
+"Python, Django, Docker y Google Cloud. Puedo desempeñarme en roles de "
+"análisis, QA, y desarrollador."
+msgstr ""
+"My name is Agustín José Fara, I was born and raised in Argentina, and I am "
+"currently %(edad)s years old. I am married and live in San Miguel, Greater "
+"Buenos Aires. I am a senior programmer analyst with %(exp_mainframe)s years "
+"of experience working across the full software development lifecycle in "
+"banking environments. Expert in the Mainframe ecosystem (COBOL, CICS, DB2, "
+"BATCH), with strong analytical skills to translate complex business rules "
+"into efficient technical solutions. My experience ranges from gathering "
+"functional requirements and analysis to implementation and certification "
+"(QA). I have a proactive mindset and continuous technical curiosity, "
+"demonstrated through personal projects outside of work, such as building and "
+"deploying my own Digital Resume using Python, Django, Docker, and Google "
+"Cloud. I can perform in roles such as Systems Analyst, QA, and Developer."
+
+#: cv/templates/cv/cv.html:52 cv/templates/cv/cv.html:98
+msgid "en"
+msgstr "at"
+
+#: cv/templates/cv/cv.html:73
+msgid "Cliente:"
+msgstr "Client:"
+
+#: portfolio/templates/portfolio/cursos.html:64
+msgid "Ver PDF / Certificado"
+msgstr "View PDF / Certificate"
+
+#: webpersonal/settings.py:159
+msgid "English"
+msgstr "English"
+
+#: webpersonal/settings.py:160
+msgid "Portuguese"
+msgstr "Portuguese"
+
+#: webpersonal/settings.py:161
+msgid "Italian"
+msgstr "Italian"
+
+#: webpersonal/settings.py:162
+msgid "French"
+msgstr "French"
+
+#: webpersonal/settings.py:163
+msgid "Spanish"
+msgstr "Spanish"

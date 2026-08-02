@@ -1,0 +1,50 @@
+{% load static %}
+{% load i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+<nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
+    <div class="container-fluid align-items-center">
+      
+      <!-- Logo -->
+      <a class="navbar-brand d-flex align-items-center" href="{% url 'core:home' %}">
+        {% include 'core/includes/svg/logo.svg' %}
+      </a>
+
+      <!-- Botón Hamburguesa -->
+      <button class="navbar-toggler border-0 shadow-none" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Menú Desplegable -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="{% url 'cv:about' %}">{% translate "Sobre mí" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'cv:tech' %}">{% translate "Tecnologías" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'cv:cv' %}">{% translate "Experiencia Laboral" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'portfolio:portfolio' %}">{% translate "Proyectos" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'portfolio:cursos' %}">{% translate "Cursos" %}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'core:contact' %}">{% translate "Contacto" %}</a></li>
+          
+          <!-- Idioma -->
+          <li class="nav-item">
+            <form action="{% url 'set_language' %}" method="post" class="d-inline m-0 p-0">
+              {% csrf_token %}
+              <input name="next" type="hidden" value="{{ request.get_full_path }}">
+              {% if 'es' in LANGUAGE_CODE %}
+                <input type="hidden" name="language" value="en">
+                <button type="submit" class="nav-link text-black border-0 bg-transparent p-0 shadow-none">ES</button>
+              {% elif 'en' in LANGUAGE_CODE %}
+                <input type="hidden" name="language" value="it">
+                <button type="submit" class="nav-link text-black border-0 bg-transparent p-0 shadow-none">EN</button>
+              {% elif 'it' in LANGUAGE_CODE %}
+                <input type="hidden" name="language" value="es">
+                <button type="submit" class="nav-link text-black border-0 bg-transparent p-0 shadow-none">IT</button>
+              {% endif %}
+            </form>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </nav>

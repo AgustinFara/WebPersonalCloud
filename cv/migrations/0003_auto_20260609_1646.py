@@ -14,9 +14,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Category',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50, verbose_name='Nombre de categoría')),
-                ('order', models.IntegerField(default=0, verbose_name='Orden de visualización')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=50,
+                 verbose_name='Nombre de categoría')),
+                ('order', models.IntegerField(default=0,
+                 verbose_name='Orden de visualización')),
             ],
             options={
                 'verbose_name': 'Categoría',
@@ -27,11 +30,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='technology',
             name='order',
-            field=models.IntegerField(default=0, verbose_name='Orden de visualización'),
+            field=models.IntegerField(
+                default=0, verbose_name='Orden de visualización'),
         ),
         migrations.AddField(
             model_name='technology',
             name='category',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='technologies', to='cv.category', verbose_name='Categoría'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE,
+                                    related_name='technologies', to='cv.category', verbose_name='Categoría'),
         ),
     ]

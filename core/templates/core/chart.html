@@ -1,10 +1,9 @@
 {% extends 'core/base.html' %}
 
-{% block title %}
-    Home
-{% endblock %}
+{% load static %}
 
-{% block bkg_img %}{% load static %}{% static '/core/img/home-bg.jpg' %}{% endblock %}
+{% block title %}Chart{% endblock %}
+
 
 {% block header %}
 <section class="header1 bkg-wood mbr-parallax-background" id="header1-f" style="padding-top: 5rem; padding-bottom: 2rem;">
@@ -37,15 +36,7 @@
 {% block content %} 
 {% if mostrar_chart %}
 <div id="bubble-container" style="width: 70vw; height: 70vh; display:flex; justify-content:center;"></div>   
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="{% static '/core/js/bubble_chart.js' %}"></script>   
-<script>
-    // Defino los datos en js para pasarlo a la función
-    const data = {{ data_jerarquica|safe }};
-    const fecha = "{{ fecha }}";    
-    // Llamo a la función D3.js
-    initBubbleChart(data, fecha);
-</script>
+
 
 {% else %}
 <div>
@@ -57,3 +48,15 @@
 </div>
 
 {% endblock %} 
+
+{% block extra_js %}
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="{% static 'core/js/bubble_chart.js' %}"></script>   
+<script>
+    // Defino los datos en js para pasarlo a la función
+    const data = {{ data_jerarquica|safe }};
+    const fecha = "{{ fecha }}";    
+    // Llamo a la función D3.js
+    initBubbleChart(data, fecha);
+</script>
+{% endblock %}
