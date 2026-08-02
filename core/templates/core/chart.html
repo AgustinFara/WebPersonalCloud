@@ -1,41 +1,58 @@
 {% extends 'core/base.html' %}
-
+{% load i18n %}
 {% load static %}
 
 {% block title %}Chart{% endblock %}
 
 
 {% block header %}
-<section class="header1 bkg-wood mbr-parallax-background" id="header1-f" style="padding-top: 5rem; padding-bottom: 2rem;">
-    <div class="mbr-overlay" style="opacity: 0.5; background-color: #65C6D4;"></div>
-    <div class="row align-items-center justify-content-center">
-                
-        <div class="col-auto">
-            <a href="{% url 'core:chart_con_fecha' fecha_ant %}" class="mbr-section-title mbr-fonts-style mb-3 display-1"><strong>&lt;</strong></a>
-        </div>
-                
-        <div class="col-auto">
-            <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1"><strong>   Protagonistas {{ fecha }}   </strong></h1>
-        </div>
+<section class="bkg-fire position-relative" id="Chart" style="padding-top: 5rem; padding-bottom: 1rem;">
+  
+  <!-- Overlay turquesa con tu clase limpia -->
+  <div class="tech-overlay position-absolute"></div>
 
-        {% if fecha < hoy %}
+  <!-- Contenido centrado -->
+  <div class="container text-center position-relative" style="z-index: 2;">
+    <div class="row align-items-center justify-content-center">
         
-        <div class="col-auto">
-            <a href="{% url 'core:chart_con_fecha' fecha_sig %}" class="mbr-section-title mbr-fonts-style mb-3 display-1"><strong>&gt;</strong></a>
-        </div>
+      <!-- Flecha Anterior -->
+      <div class="chart-links col-auto">
+        <a href="{% url 'core:chart_con_fecha' fecha_ant %}" class="px-2" title="{% translate 'Anterior' %}">
+          <i class="fas fa-chevron-left"></i>
+        </a>
+      </div>
+            
+      <!-- Título Central -->
+      <div class="col-auto">
+        <h1 class="chart-title m-0 fw-bold">
+          {% translate "Protagonistas" %} {{ fecha }}
+        </h1>
+      </div>
+
+      <!-- Flecha Siguiente (Activa / Deshabilitada) -->
+      <div class="col-auto chart-links">
+        {% if fecha < hoy %}
+          <a href="{% url 'core:chart_con_fecha' fecha_sig %}" class="px-2" title="{% translate 'Siguiente' %}">
+            <i class="fas fa-chevron-right"></i>
+          </a>
         {% else %}
-        <div class="col-auto">
-            <P class="mbr-section-title mbr-fonts-style mb-3 display-1" style="color: gray;opacity: 0.40"><strong>&gt;</strong></P>
-        </div>
+          <span class="tech-title text-muted opacity-25 px-2 cursor-not-allowed">
+            <i class="fas fa-chevron-right"></i>
+          </span>
         {% endif %}
+      </div>
+
     </div>
+  </div>
+
 </section>
+
 {% endblock %}
 
 
 {% block content %} 
 {% if mostrar_chart %}
-<div id="bubble-container" style="width: 70vw; height: 70vh; display:flex; justify-content:center;"></div>   
+<div id="bubble-container" style="width: 70vw; height: 50vh; display:flex; justify-content:center;"></div>   
 
 
 {% else %}

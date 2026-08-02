@@ -104,7 +104,7 @@
 
 /* Iconos de redes sociales */
 .contact-links a {
-  color: rgb(34, 153, 170); 
+  color: #000000; 
   font-size: 5.5rem;         /* Tamaño de los íconos */
   text-decoration: none;
   transition: opacity 0.2s ease, transform 0.2s ease;
@@ -113,7 +113,8 @@
 
 /* Efecto hover suave al pasar el mouse por encima */
 .contact-links a:hover {
-  color: rgb(25, 120, 135); /* Tono un poquitito más oscuro al hacer hover */
+  color: rgb(34, 153, 170);
+  opacity: 0.75 ;
   transform: translateY(-2px);
 }
 
@@ -347,5 +348,44 @@
 
 .bkg-rock {
     background-image: url("/static/core/img/rock.jpg");
+}
+
+/*-----------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------Noticias------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------*/
+
+.bkg-city {
+    background-image: url("/static/core/img/city.jpg");
+}
+
+/*-----------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------Chart-------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------*/
+
+.bkg-fire {
+    background-image: url("/static/core/img/fire.jpg");
+}
+
+.chart-title {
+  font-family: 'Jost', sans-serif !important;
+  font-weight: 700; /* Podés ajustar el grosor: 400 (normal), 500 (medium), 700 (bold) */
+  font-size: 4rem;
+  color: #000000;
+}
+
+.chart-links a {
+  color: #000000; 
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 4rem;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+/* Efecto hover suave al pasar el mouse por encima */
+.chart-links a:hover {
+  color: rgb(34, 153, 170);
+  opacity: 0.75 ;
+  transform: translateY(-2px);
 }
 
