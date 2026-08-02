@@ -5,6 +5,7 @@ from django.test import TestCase
 from .models import Course, Project
 
 
+
 class ProjectModelTest(TestCase):
     def setUp(self):
         # Creamos un proyecto de prueba

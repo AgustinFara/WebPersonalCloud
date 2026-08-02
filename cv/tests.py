@@ -127,6 +127,7 @@ class TestExpAbout(TestCase):
 
     def setUp(self):
         self.client = Client()
+        translation.activate('es')
         self.url = reverse('cv:about')
 
     def test_experiencia_mainframe_redondea_hacia_arriba_con_10_meses(self):
@@ -165,3 +166,6 @@ class TestExpAbout(TestCase):
         self.assertEqual(response.status_code, 200)
         # Como son 8 meses restantes, tiene que quedarse en los 19 años base
         self.assertEqual(response.context['exp_mainframe'], 19)
+
+    def tearDown(self):
+        translation.deactivate() # Buena práctica: desactivar al terminar el test
