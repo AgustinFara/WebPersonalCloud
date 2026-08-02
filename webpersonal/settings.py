@@ -196,6 +196,11 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 # que es compatible con Supabase Storage, para almacenar archivos multimedia.
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
+# Agrego Static General
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
 # Configuro archivos multimedia subidos por usuarios/admin (Supabase Storage)
 AWS_ACCESS_KEY_ID = SUPABASE_ACCESS_KEY
 AWS_SECRET_ACCESS_KEY = SUPABASE_SECRET
