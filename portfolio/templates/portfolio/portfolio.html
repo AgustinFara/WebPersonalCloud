@@ -49,6 +49,13 @@
             {{ project.description|linebreaks }}
           </div>
 
+          <p class="text-muted mb-3">
+            <small>
+              <i class="far fa-calendar-alt me-1"></i> {{ project.date|date:"DATE_FORMAT" }}
+            </small>
+          </p>
+
+
           {% if project.link %}
             <div class="project-actions">
               <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-info btn-sm">
