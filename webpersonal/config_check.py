@@ -2,6 +2,25 @@
 # IMPORTS
 # ==============================================================================
 import os
+import sys
+
+
+def es_build():
+    # Comandos de gestión de Django que no requieren la infraestructura de prod
+    BUILD_ONLY_COMMANDS = {'compilemessages', 'collectstatic', 'makemigrations', 'check'}
+    
+    # 1. Si se está ejecutando un comando de build o una variable explícita indica modo Build
+    is_build_phase = (
+        any(cmd in sys.argv for cmd in BUILD_ONLY_COMMANDS) or 
+        os.getenv('BUILD_MODE') == 'true'
+    )
+    
+    if is_build_phase:
+        return 'True'
+    else:
+        return 'False'
+
+
 
 # ==============================================================================
 # Valida Google Application Credentials y la devuelve en settings.py

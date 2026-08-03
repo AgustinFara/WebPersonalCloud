@@ -23,6 +23,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # 5. Copiar todo el código
 COPY . .
 
+# COMPILACIÓN DE IDIOMAS
+# Compila apuntando solo a los idiomas del proyecto (en, it)
+ RUN python manage.py compilemessages -l en -l it
+
+
 EXPOSE 8080
 
 COPY entrypoint.sh /app/entrypoint.sh

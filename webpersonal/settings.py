@@ -30,15 +30,31 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Validaciones de Variables de Entorno y carga de las mismas.
 # ==============================================================================
 
-GOOGLE_APPLICATION_CREDENTIALS = cfg.validar_google_aplication_credentials()
-DEBUG = cfg.validar_debug()
-ALLOWED_HOSTS = cfg.validar_allowed_hosts()
-SECRET_KEY = cfg.validar_secret_key()
-DB_SCHEMA = cfg.validar_schema()
-DB_URL = cfg.validar_db_url()
-SUPABASE_SECRET = cfg.validar_supabase_secret()
-SUPABASE_ACCESS_KEY = cfg.validar_supabase_access_key()
-SUPABASE_PROJECT_ID = cfg.validar_supabase_project_id()
+BUILD = cfg.es_build()
+
+if BUILD == 'True':
+    # 2. Valores temporales/dummy para que el build no rompa por variables faltantes
+    SECRET_KEY = 'dummy-secret-key-for-build'
+    DEBUG = False
+    ALLOWED_HOSTS = ['localhost']
+    SECRET_KEY = 'dummy-secret-key-for-build'
+    DB_SCHEMA = 'dummy'
+    DB_URL = 'postgres://dummy:dummy@localhost:5432/dummy'
+    SUPABASE_SECRET = 'dummy-supabase-secret'
+    SUPABASE_ACCESS_KEY = 'dummy-access-key'
+    SUPABASE_PROJECT_ID = 'dummy-project-id'
+else:
+    GOOGLE_APPLICATION_CREDENTIALS = cfg.validar_google_aplication_credentials()
+    DEBUG = cfg.validar_debug()
+    ALLOWED_HOSTS = cfg.validar_allowed_hosts()
+    SECRET_KEY = cfg.validar_secret_key()
+    DB_SCHEMA = cfg.validar_schema()
+    DB_URL = cfg.validar_db_url()
+    SUPABASE_SECRET = cfg.validar_supabase_secret()
+    SUPABASE_ACCESS_KEY = cfg.validar_supabase_access_key()
+    SUPABASE_PROJECT_ID = cfg.validar_supabase_project_id()
+
+
 
 
 # ==============================================================================
@@ -199,6 +215,11 @@ DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 # Agrego Static General
 STATICFILES_DIRS = [
     BASE_DIR / "static",
+]
+
+# Agrego carpeta de localización
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
 ]
 
 # Configuro archivos multimedia subidos por usuarios/admin (Supabase Storage)
