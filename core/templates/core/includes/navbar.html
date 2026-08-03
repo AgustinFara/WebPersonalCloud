@@ -26,20 +26,36 @@
           <li class="nav-item"><a class="nav-link" href="{% url 'portfolio:cursos' %}">{% translate "Cursos" %}</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'core:contact' %}">{% translate "Contacto" %}</a></li>
           
-          <!-- Idioma -->
+          <!-- Selector de Idioma con Banderas (ARG, USA, ITA) -->
           <li class="nav-item">
             <form action="{% url 'set_language' %}" method="post" class="d-inline m-0 p-0">
               {% csrf_token %}
               <input name="next" type="hidden" value="{{ request.get_full_path }}">
+              
               {% if 'es' in LANGUAGE_CODE %}
-                <input type="hidden" name="language" value="en">
-                <button type="submit" class="nav-link text-black border-0 bg-transparent p-0 shadow-none">ES</button>
+                <input type="hidden" name="language" value="en">          
+                <button type="submit" class="nav-link text-black border-0 bg-transparent p-0 shadow-none d-flex align-items-center">
+                  <span class="flag-round d-inline-block overflow-hidden">
+                    {% include 'core/includes/svg/ar.svg' %}
+                  </span>
+                  <span class="ms-1">ES</span>
+                </button>
               {% elif 'en' in LANGUAGE_CODE %}
                 <input type="hidden" name="language" value="it">
-                <button type="submit" class="nav-link text-black border-0 bg-transparent p-0 shadow-none">EN</button>
+                <button type="submit" class="nav-link text-black border-0 bg-transparent p-0 shadow-none d-flex align-items-center">
+                  <span class="flag-round d-inline-block overflow-hidden">
+                    {% include 'core/includes/svg/us.svg' %}
+                  </span>
+                  <span class="ms-1">EN</span>
+                </button>
               {% elif 'it' in LANGUAGE_CODE %}
                 <input type="hidden" name="language" value="es">
-                <button type="submit" class="nav-link text-black border-0 bg-transparent p-0 shadow-none">IT</button>
+                <button type="submit" class="nav-link text-black border-0 bg-transparent p-0 shadow-none d-flex align-items-center">
+                  <span class="flag-round d-inline-block overflow-hidden">
+                    {% include 'core/includes/svg/it.svg' %}
+                  </span>
+                  <span class="ms-1">IT</span>
+                </button>
               {% endif %}
             </form>
           </li>

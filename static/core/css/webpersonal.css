@@ -62,6 +62,30 @@
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
 }
 
+.flag-round {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  margin-right: 0.25rem;
+  
+  /* Forzamos a que actúe como un contenedor Flexbox centrado */
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; /* Para que no se aplaste si el botón se achica */
+}
+
+/* Regla clave: obliga al SVG interno a escalar y centrarse */
+.flag-round svg {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block;
+}
+
+
 /*-----------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------FOOTER------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------*/
@@ -358,6 +382,27 @@
     background-image: url("/static/core/img/city.jpg");
 }
 
+.news-list {
+padding: 20px;
+min-height: 50vh;
+}
+
+.news-item { 
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.dot { 
+  width: 15px; height: 15px; 
+  background: #65C6D4; border-radius: 50%; 
+  margin-right: 15px; 
+}
+
+.content {
+  font-family: sans-serif; 
+}
+
+
 /*-----------------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------Chart-------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------------*/
@@ -389,3 +434,12 @@
   transform: translateY(-2px);
 }
 
+.chart-overlay {
+  background-color: #65C6D4;
+  opacity: 0.3;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
