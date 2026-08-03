@@ -71,6 +71,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # ==============================================================================
 
 INSTALLED_APPS = [
+    # Modeltranslation
+    "modeltranslation",
     # Django core apps
     "django.contrib.admin",
     "django.contrib.auth",
@@ -79,6 +81,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Third-party apps
+
     "storages",
     # Local apps
     "core.apps.CoreConfig",
