@@ -69,7 +69,7 @@
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.15);
   margin-right: 0.25rem;
-  
+  pointer-events: none;
   /* Forzamos a que actúe como un contenedor Flexbox centrado */
   display: inline-flex !important;
   align-items: center;
