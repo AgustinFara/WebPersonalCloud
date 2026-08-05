@@ -51,18 +51,23 @@
 
           <p class="text-muted mb-3">
             <small>
-              <i class="far fa-calendar-alt me-1"></i> {{ project.date|date:"DATE_FORMAT" }}
+              <i class="far fa-calendar-alt me-1"></i> {{ project.date|date:"YEAR_MONTH_FORMAT" }}
             </small>
           </p>
 
-
-          {% if project.link %}
             <div class="project-actions">
+          {% if project.link %}
               <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-info btn-sm">
-                <i class="fas fa-external-link-alt me-1"></i> Ver Proyecto
+                <i class="fas fa-external-link-alt me-1"></i> {% translate "Ver Proyecto" %}
               </a>
-            </div>
           {% endif %}
+
+          {% if project.link_repo %}
+              <a href="{{ project.link_repo }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-info btn-sm">
+                <i class="fab fa-github me-1"></i> {% translate "Repositorio" %}
+              </a>
+          {% endif %}
+            </div>
         </div>
 
       </div>

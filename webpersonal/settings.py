@@ -194,9 +194,9 @@ USE_TZ = True
 # Zona horaria por defecto para la presentación en los templates
 TIME_ZONE = "America/Argentina/Buenos_Aires"
 
-# Carpetas donde Django buscará los archivos de traducción (.po / .mo)
+# Agrego carpeta de localización
 LOCALE_PATHS = [
-    os.path.join(BASE_DIR, "locale"),
+    BASE_DIR / 'locale',
 ]
 
 # A dónde redirigir después de cambiar idioma si no se especifica una página
@@ -218,11 +218,6 @@ DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 # Agrego Static General
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-]
-
-# Agrego carpeta de localización
-LOCALE_PATHS = [
-    BASE_DIR / 'locale',
 ]
 
 # Configuro archivos multimedia subidos por usuarios/admin (Supabase Storage)

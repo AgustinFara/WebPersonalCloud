@@ -14,6 +14,8 @@ class Project(models.Model):
         auto_now=True, verbose_name="Cronomarcador de modificación")
     link = models.URLField(blank=True, null=True,
                            verbose_name="link para más información")
+    link_repo = models.URLField(
+        blank=True, null=True, verbose_name="Link Repositorio")
 
     class Meta:
         verbose_name = 'Proyecto'

@@ -50,9 +50,9 @@
           <div class="timeline-content">
             <h3 class="timeline-title">
               {{ work.title }} {% translate "en" %} <strong>{{ work.company }}</strong>
-            </h3>
-            <p class="timeline-date">
-              {{ work.date_started }} - {{ work.date_finished }} &nbsp; <span>({{ work.time_worked }})</span>
+            </h3>            
+            <p class="timeline-date"><i class="far fa-calendar-alt me-1"></i>
+              {{ work.datestart|date:"YEAR_MONTH_FORMAT" }} - {{ work.datefinish|date:"YEAR_MONTH_FORMAT" }} &nbsp; <span>({{ work.time_worked_format }})</span>
             </p>
           </div>
         </div>
@@ -72,8 +72,8 @@
               <h4 class="timeline-subtitle">
                 {% translate "Cliente:" %} <strong>{{ client.company }}</strong>
               </h4>
-              <p class="timeline-date">
-                {{ client.date_started }} - {{ client.date_finished }} &nbsp; <span>({{ client.time_worked }})</span>
+              <p class="timeline-date"><i class="far fa-calendar-alt me-1"></i>
+                {{ client.datestart|date:"YEAR_MONTH_FORMAT" }} - {{ client.datefinish|date:"YEAR_MONTH_FORMAT" }} &nbsp; <span>({{ client.time_worked_format }})</span>
               </p>
               <div class="timeline-body mt-2">
                 {{ client.description|linebreaks }}
@@ -97,8 +97,8 @@
             <h3 class="timeline-title">
               {{ work.title }} {% translate "en" %} <strong>{{ work.company }}</strong>
             </h3>
-            <p class="timeline-date">
-              {{ work.date_started }} - {{ work.date_finished }} &nbsp; <span>({{ work.time_worked }})</span>
+            <p class="timeline-date"><i class="far fa-calendar-alt me-1"></i>
+              {{ work.datestart|date:"YEAR_MONTH_FORMAT" }} - {{ work.datefinish|date:"YEAR_MONTH_FORMAT" }} &nbsp; <span>({{ work.time_worked_format }})</span>
             </p>
 
             <div class="timeline-body mt-3">

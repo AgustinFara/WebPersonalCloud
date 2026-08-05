@@ -1,7 +1,11 @@
+
 from babel import Locale
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils import timezone
+from django.utils.translation import gettext as _
+from django.utils.translation import ngettext
 
 
 class Category(models.Model):
@@ -111,7 +115,7 @@ class Work(models.Model):
             if months == 1:
                 days_diff = self.datefinish - self.datestart
                 if days_diff.days < 30:
-                    return ('Menos de un mes')
+                    return _('Menos de un mes')
                 else:
                     return (str(months) + month_name)
             else:
@@ -121,6 +125,30 @@ class Work(models.Model):
                 return (str(years) + year_name)
             else:
                 return (str(years) + year_name + ' y ' + str(months) + month_name)
+
+    def time_worked_format(self):
+        if not self.datestart:
+            return ""
+            
+        end_date = self.datefinish or timezone.localdate()
+
+        total_months = (end_date.year - self.datestart.year) * 12 + (end_date.month - self.datestart.month)
+
+        years = total_months // 12
+        months = total_months % 12
+
+        # Menos de 1 mes transcurrido
+        if years == 0 and months == 0:
+            return _("Menos de un mes")
+
+        # Usamos ngettext y gettext evaluados al instante al llamar a la función
+        years_str = ngettext("%(count)d año", "%(count)d años", years) % {'count': years} if years > 0 else None
+        months_str = ngettext("%(count)d mes", "%(count)d meses", months) % {'count': months} if months > 0 else None
+
+        if years_str and months_str:
+            return _("%(years)s y %(months)s") % {'years': years_str, 'months': months_str}
+
+        return years_str or months_str
 
 
 class Client(models.Model):
@@ -179,7 +207,7 @@ class Client(models.Model):
             if months == 1:
                 days_diff = self.datefinish - self.datestart
                 if days_diff.days < 30:
-                    return ('Menos de un mes')
+                    return _('Menos de un mes')
                 else:
                     return (str(months) + month_name)
             else:
@@ -189,3 +217,27 @@ class Client(models.Model):
                 return (str(years) + year_name)
             else:
                 return (str(years) + year_name + ' y ' + str(months) + month_name)
+
+    def time_worked_format(self):
+        if not self.datestart:
+            return ""
+            
+        end_date = self.datefinish or timezone.localdate()
+
+        total_months = (end_date.year - self.datestart.year) * 12 + (end_date.month - self.datestart.month)
+
+        years = total_months // 12
+        months = total_months % 12
+
+        # Menos de 1 mes transcurrido
+        if years == 0 and months == 0:
+            return _("Menos de un mes")
+
+        # Usamos ngettext y gettext evaluados al instante al llamar a la función
+        years_str = ngettext("%(count)d año", "%(count)d años", years) % {'count': years} if years > 0 else None
+        months_str = ngettext("%(count)d mes", "%(count)d meses", months) % {'count': months} if months > 0 else None
+
+        if years_str and months_str:
+            return _("%(years)s y %(months)s") % {'years': years_str, 'months': months_str}
+
+        return years_str or months_str
