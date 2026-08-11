@@ -36,4 +36,4 @@ jobs:
             --platform managed \
             --region us-central1 \
             --allow-unauthenticated \
-            --set-env-vars DB_URL=${{ secrets.DB_URL }},SECRET_KEY=${{ secrets.SECRET_KEY }},ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }},SUPABASE_ACCESS_KEY=${{ secrets.SUPABASE_ACCESS_KEY }},SUPABASE_SECRET=${{ secrets.SUPABASE_SECRET }},SUPABASE_PROJECT_ID=${{ secrets.SUPABASE_PROJECT_ID }},DB_SCHEMA=${{ secrets.DB_SCHEMA }}
+            --set-env-vars "DB_URL=${{ secrets.DB_URL }},SECRET_KEY=${{ secrets.SECRET_KEY }},ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }},SUPABASE_ACCESS_KEY=${{ secrets.SUPABASE_ACCESS_KEY }},SUPABASE_SECRET=${{ secrets.SUPABASE_SECRET }},SUPABASE_PROJECT_ID=${{ secrets.SUPABASE_PROJECT_ID }},DB_SCHEMA=${{ secrets.DB_SCHEMA }}""
