@@ -23,7 +23,7 @@ class SettingsTestCase(SimpleTestCase):
         self.env_valido = {
             'GOOGLE_APPLICATION_CREDENTIALS': '/path/fake.json',
             'DEBUG': 'True',
-            'ALLOWED_HOSTS': 'localhost 127.0.0.1',
+            'ALLOWED_HOSTS': 'localhost|127.0.0.1',
             'SECRET_KEY': 'clave-de-prueba-super-secreta',
             'DB_SCHEMA': 'public',
             'DB_URL': 'postgres://user:pass@localhost:5432/db',

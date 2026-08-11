@@ -92,7 +92,7 @@ def validar_allowed_hosts():
     # 'ALLOWED_HOSTS' para producción
     ALLOWED_HOSTS_RAW = os.environ.get("ALLOWED_HOSTS")
     if ALLOWED_HOSTS_RAW:
-        ALLOWED_HOSTS = ALLOWED_HOSTS_RAW.split(" ")
+        ALLOWED_HOSTS = ALLOWED_HOSTS_RAW.split("|")
         print(f"✅ ALLOWED_HOSTS cargado: {ALLOWED_HOSTS}")
         return ALLOWED_HOSTS
     else:
