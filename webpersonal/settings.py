@@ -117,6 +117,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                #Para tener el CV en la NavBar
+                "core.context_processors.ultimo_cv",
             ],
         },
     },

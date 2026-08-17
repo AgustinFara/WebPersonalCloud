@@ -25,13 +25,21 @@
           <li class="nav-item"><a class="nav-link" href="{% url 'portfolio:portfolio' %}">{% translate "Proyectos" %}</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'portfolio:cursos' %}">{% translate "Cursos" %}</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'core:contact' %}">{% translate "Contacto" %}</a></li>
-          
+          {% if cv_actual and cv_actual.archivo_pdf %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ cv_actual.archivo_pdf.url }}?download=" title="{% translate 'Descargar C.V.' %}">
+              <i class="far fa-file-pdf"></i>
+              {% translate "CV" %}
+            </a>
+          </li>
+          {% endif %}
+                    
           <!-- Selector de Idioma con Banderas (ARG, USA, ITA) -->
           <li class="nav-item">
             <form action="{% url 'set_language' %}" method="post" class="d-inline m-0 p-0">
               {% csrf_token %}
               <input name="next" type="hidden" value="{{ request.get_full_path }}">
-              
+
               {% if 'es' in LANGUAGE_CODE %}
                 <input type="hidden" name="language" value="en">          
                 <button type="submit" class="nav-link text-black border-0 bg-transparent p-0 shadow-none d-flex align-items-center">

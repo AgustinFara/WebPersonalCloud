@@ -41,7 +41,7 @@
 /* Color base de la Navbar */
 .navbar-custom {
   background-color: rgba(101, 198, 212, 0.95);
-  min-height: 77px;
+  min-height: 3.40rem;
 }
 
 /* En mobile, el menú aparece flotando */

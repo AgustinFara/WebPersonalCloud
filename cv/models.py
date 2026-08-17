@@ -6,6 +6,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.utils.translation import ngettext
+from django.db.models import F
 
 
 class Category(models.Model):
@@ -66,8 +67,9 @@ class Work(models.Model):
     class Meta:
         verbose_name = 'Trabajo'
         verbose_name_plural = 'Trabajos'
-        ordering = ['-datestart']
+#        ordering = ['-datestart']
 #        ordering = ['-datefinish'] Lo cambio a datestart porque permito nulls por nuevo campo is_current
+        ordering = ['-is_current', '-datestart']
 
     def clean(self):
         # Si NO es el trabajo actual, datefinish es obligatorio
